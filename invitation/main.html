@@ -1,0 +1,3199 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-locked">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday — Nasywa Anggieta Tiara</title>
+
+    <!-- Google Fonts: Script, Serif & Typewriter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Dancing+Script:wght@600;700&family=Special+Elite&display=swap"
+        rel="stylesheet" />
+
+    <style>
+        /* ==========================================================================
+       1. CSS VARIABLES & RESET
+       ========================================================================== */
+        :root {
+            /* Maroon merah bata hangat agar hati putih terlihat tegas */
+            --maroon-dark: #68131E;
+            --maroon: #821B28;
+            --maroon-light: #992433;
+            --cream: #F6EDE0;
+            --cream-soft: #FCF7F0;
+            --gold: #C9A24D;
+            --gold-light: #E5C982;
+            --pink: #EAB8BC;
+            --pink-dark: #C88288;
+            --ink: #38171C;
+            --ink-muted: #6C454B;
+
+            --font-script: 'Dancing Script', 'Caveat', cursive;
+            --font-hand: 'Caveat', cursive;
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-type: 'Special Elite', 'Courier New', monospace;
+
+            --shadow-soft: 0 12px 28px rgba(42, 6, 12, 0.28);
+            --shadow-card: 0 8px 20px rgba(48, 12, 18, 0.22);
+            --ease-overshoot: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Fix A1 & A6: Jangan pasang overflow-x di html/body agar scroll-snap ke viewport bekerja.
+       Kunci scroll hanya sampai amplop dibuka (.scroll-locked). */
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y proximity;
+            background-color: var(--maroon-dark);
+        }
+
+        html.scroll-locked {
+            overflow: hidden;
+            height: 100%;
+        }
+
+        body {
+            font-family: var(--font-serif);
+            color: var(--cream);
+            background-color: var(--maroon);
+            /* Fix B1: Pola hati putih & polkadot tegas (opacity ~0.65) */
+            background-image: url("data:image/svg+xml,%3Csvg width='68' height='68' viewBox='0 0 68 68' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FFF8F0' fill-opacity='0.62'%3E%3Ccircle cx='14' cy='14' r='2.5'/%3E%3Ccircle cx='48' cy='48' r='2.5'/%3E%3Ccircle cx='52' cy='15' r='1.7'/%3E%3Ccircle cx='16' cy='52' r='1.7'/%3E%3Cpath d='M34 29c-2-3-6.4-2.5-7.6.7-1.1 3 1.1 6.2 7.6 10.6 6.5-4.4 8.7-7.6 7.6-10.6-1.2-3.2-5.6-3.7-7.6-.7z'/%3E%3C/g%3E%3C/svg%3E");
+            background-attachment: fixed;
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Fix B7: Tekstur kertas ringan (tanpa feTurbulence berat) & z-index aman di bawah konten */
+        .paper-surface {
+            position: relative;
+            background-color: var(--cream);
+            color: var(--ink);
+            background-image:
+                radial-gradient(rgba(201, 162, 77, 0.16) 1px, transparent 0),
+                radial-gradient(rgba(130, 27, 40, 0.08) 1px, transparent 0),
+                repeating-linear-gradient(0deg,
+                    rgba(130, 27, 40, 0.025) 0px,
+                    rgba(130, 27, 40, 0.025) 1px,
+                    transparent 1px,
+                    transparent 6px);
+            background-size: 22px 22px, 22px 22px, 100% 6px;
+            background-position: 0 0, 11px 11px, 0 0;
+        }
+
+        .paper-surface>* {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ==========================================================================
+       2. PROGRESS BAR & DOT NAVIGATION (C)
+       ========================================================================== */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3.5px;
+            background: rgba(255, 255, 255, 0.15);
+            z-index: 90;
+            pointer-events: none;
+        }
+
+        .scroll-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--pink), var(--gold-light));
+            transition: width 0.15s ease-out;
+        }
+
+        .side-dots {
+            position: fixed;
+            right: 0.55rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 85;
+            display: flex;
+            flex-direction: column;
+            gap: 0.48rem;
+            padding: 0.45rem 0.25rem;
+            background: rgba(56, 12, 19, 0.45);
+            backdrop-filter: blur(4px);
+            border-radius: 999px;
+            border: 1px solid rgba(201, 162, 77, 0.35);
+        }
+
+        .side-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: rgba(246, 237, 224, 0.4);
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: transform 0.25s ease, background 0.25s ease;
+        }
+
+        .side-dot.is-active {
+            background: var(--gold-light);
+            transform: scale(1.45);
+        }
+
+        /* ==========================================================================
+       3. LAYOUT & SECTION SHELL (ALTERNATING MAROON & CREAM RHYTHM - B2)
+       ========================================================================== */
+        main {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Fix A7: Fallback 100vh sebelum 100svh */
+        section {
+            min-height: 100vh;
+            min-height: 100svh;
+            scroll-snap-align: start;
+            padding: 2.75rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Section tema Maroon (hati putih terlihat jelas tanpa overlay pekat) */
+        section.theme-maroon {
+            background: linear-gradient(180deg, rgba(130, 27, 40, 0.32) 0%, rgba(104, 19, 30, 0.45) 100%);
+            color: var(--cream);
+        }
+
+        /* Section tema Krem / Kertas Penuh (ritme selang-seling scrapbook) */
+        section.theme-cream {
+            background-color: var(--cream);
+            color: var(--ink);
+            background-image:
+                radial-gradient(rgba(201, 162, 77, 0.18) 1px, transparent 0),
+                radial-gradient(rgba(130, 27, 40, 0.08) 1px, transparent 0);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+            border-top: 2px dashed rgba(201, 162, 77, 0.55);
+            border-bottom: 2px dashed rgba(201, 162, 77, 0.55);
+        }
+
+        .section-inner {
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Tipografi Umum */
+        .title-script {
+            font-family: var(--font-script);
+            font-size: clamp(2.15rem, 8vw, 2.8rem);
+            line-height: 1.15;
+            color: var(--gold-light);
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+            margin-bottom: 0.4rem;
+        }
+
+        .theme-cream .title-script,
+        .title-script.dark {
+            color: var(--maroon);
+            text-shadow: none;
+        }
+
+        .subtitle-serif {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: clamp(1.05rem, 4vw, 1.2rem);
+            color: var(--cream-soft);
+            text-align: center;
+            margin-bottom: 1.4rem;
+        }
+
+        .theme-cream .subtitle-serif,
+        .subtitle-serif.dark {
+            color: var(--ink-muted);
+        }
+
+        /* Fix B5: Target minimal ~12px (0.75rem) untuk badge/label */
+        .tag-typewriter {
+            font-family: var(--font-type);
+            font-size: 0.76rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            background: rgba(68, 12, 20, 0.75);
+            border: 1px solid rgba(201, 162, 77, 0.55);
+            padding: 0.3rem 0.85rem;
+            border-radius: 999px;
+            margin-bottom: 0.65rem;
+            display: inline-block;
+        }
+
+        .theme-cream .tag-typewriter {
+            color: var(--maroon);
+            background: rgba(234, 184, 188, 0.35);
+            border-color: rgba(130, 27, 40, 0.35);
+        }
+
+        /* ==========================================================================
+       4. DEKORASI VINTAGE SCRAPBOOK (BUNTING, TAPE, ORNAMENT)
+       ========================================================================== */
+        .bunting-wrap {
+            width: 100%;
+            max-width: 440px;
+            margin-bottom: 0.5rem;
+            transform-origin: top center;
+        }
+
+        .reveal.is-visible .bunting-wrap {
+            animation: buntingSwing 2.2s var(--ease-smooth) forwards;
+        }
+
+        @keyframes buntingSwing {
+            0% {
+                transform: translateY(-32px) rotate(-4deg);
+                opacity: 0;
+            }
+
+            45% {
+                transform: translateY(4px) rotate(2.5deg);
+                opacity: 1;
+            }
+
+            75% {
+                transform: translateY(-2px) rotate(-1.2deg);
+            }
+
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+
+        .tape {
+            position: absolute;
+            width: 64px;
+            height: 19px;
+            background: rgba(234, 184, 188, 0.78);
+            border-left: 1px dashed rgba(255, 255, 255, 0.6);
+            border-right: 1px dashed rgba(255, 255, 255, 0.6);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14);
+            z-index: 4;
+            pointer-events: none;
+            transform-origin: center;
+        }
+
+        .tape.gold {
+            background: rgba(201, 162, 77, 0.62);
+        }
+
+        .tape.top-center {
+            top: -9px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-2deg);
+        }
+
+        .tape.top-left {
+            top: -7px;
+            left: 6px;
+            transform: rotate(-22deg);
+            width: 50px;
+            height: 16px;
+        }
+
+        .tape.top-right {
+            top: -7px;
+            right: 6px;
+            transform: rotate(19deg);
+            width: 50px;
+            height: 16px;
+        }
+
+        /* Tape muncul terakhir dengan scaleX pada item kolase (C) */
+        .collage-item .tape {
+            scale: 0 1;
+            transition: scale 0.45s var(--ease-overshoot) calc(var(--i, 0) * 100ms + 420ms);
+        }
+
+        .collage-item.is-visible .tape {
+            scale: 1 1;
+        }
+
+        .divider-ornament {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            margin: 0.75rem 0 1.25rem;
+            color: var(--gold);
+            font-size: 0.95rem;
+        }
+
+        .divider-ornament span.line {
+            width: 48px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        /* ==========================================================================
+       5. POLAROID & IMAGE PLACEHOLDER SYSTEM
+       ========================================================================== */
+        .polaroid {
+            background: var(--cream-soft);
+            padding: 0.6rem 0.6rem 1.75rem;
+            border-radius: 4px;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            color: var(--ink);
+            border: 1px solid rgba(130, 27, 40, 0.12);
+        }
+
+        .polaroid-frame {
+            width: 100%;
+            aspect-ratio: 4 / 4;
+            background: #EADCCB;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(130, 27, 40, 0.14);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .polaroid-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .polaroid-caption {
+            font-family: var(--font-hand);
+            font-size: 1.08rem;
+            color: var(--ink);
+            text-align: center;
+            margin-top: 0.42rem;
+            line-height: 1.15;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0.75rem;
+            background:
+                repeating-linear-gradient(45deg,
+                    rgba(234, 184, 188, 0.25),
+                    rgba(234, 184, 188, 0.25) 8px,
+                    rgba(246, 237, 224, 0.75) 8px,
+                    rgba(246, 237, 224, 0.75) 16px);
+            color: var(--maroon);
+            gap: 0.3rem;
+        }
+
+        .photo-placeholder svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--maroon-light);
+            opacity: 0.8;
+        }
+
+        .photo-placeholder span {
+            font-family: var(--font-hand);
+            font-size: 0.98rem;
+            line-height: 1.15;
+            color: var(--ink-muted);
+        }
+
+        /* ==========================================================================
+       SECTION 1: COVER AMPLOP (FIX A3, A4, A6 & SIGNATURE ANIMATION C)
+       ========================================================================== */
+        #sec-envelope {
+            padding: 1.5rem 1rem;
+            transition: transform 0.85s var(--ease-smooth), opacity 0.75s ease;
+        }
+
+        #sec-envelope.is-zooming-out {
+            transform: scale(1.12);
+            opacity: 0.15;
+        }
+
+        .envelope-hint {
+            font-family: var(--font-type);
+            font-size: 0.8rem;
+            color: var(--cream-soft);
+            letter-spacing: 0.08em;
+            margin-bottom: 1.25rem;
+            text-align: center;
+        }
+
+        /* Fix A3: perspective pada stage, dan flap menjadi saudara envelope-body (tidak terpotong overflow:hidden) */
+        .envelope-stage {
+            width: 100%;
+            max-width: 350px;
+            aspect-ratio: 4 / 3;
+            position: relative;
+            perspective: 1100px;
+            transform-style: preserve-3d;
+            user-select: none;
+        }
+
+        .envelope-body {
+            width: 100%;
+            height: 100%;
+            background-color: #8C1D2B;
+            background-image: radial-gradient(rgba(255, 248, 240, 0.32) 2.2px, transparent 2.2px);
+            background-size: 20px 20px;
+            border-radius: 10px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 20px 45px rgba(28, 3, 8, 0.6), inset 0 0 28px rgba(48, 5, 12, 0.45);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* Surat mengintip di dalam amplop */
+        .envelope-letter-peek {
+            position: absolute;
+            left: 8%;
+            right: 8%;
+            bottom: 8%;
+            height: 76%;
+            background: var(--cream);
+            border-radius: 6px;
+            border: 1px solid var(--gold);
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: center;
+            color: var(--maroon);
+            transition: transform 0.8s var(--ease-smooth) 0.25s;
+            z-index: 2;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .envelope-stage.is-open .envelope-letter-peek {
+            transform: translateY(-42%);
+        }
+
+        /* Lipatan bawah & samping amplop */
+        .envelope-pocket {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .envelope-pocket::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, #6E1320 50%, transparent 50.5%),
+                linear-gradient(225deg, #6E1320 50%, transparent 50.5%);
+            background-size: 50% 100%;
+            background-position: left bottom, right bottom;
+            background-repeat: no-repeat;
+            opacity: 0.94;
+        }
+
+        .envelope-pocket::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 58%;
+            background: linear-gradient(180deg, #821B28 0%, #5E0F1A 100%);
+            clip-path: polygon(0 100%, 50% 12%, 100% 100%);
+            border-top: 1px solid rgba(201, 162, 77, 0.55);
+        }
+
+        /* Fix A3: Flap berada di luar .envelope-body sebagai anak langsung .envelope-stage */
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 56%;
+            background-color: #992433;
+            background-image:
+                radial-gradient(rgba(255, 248, 240, 0.3) 2.2px, transparent 2.2px),
+                linear-gradient(180deg, #9E2636 0%, #781724 100%);
+            background-size: 20px 20px, 100% 100%;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            transform-origin: top center;
+            transition: transform 0.72s cubic-bezier(0.4, 0, 0.2, 1), z-index 0s linear 0.35s;
+            z-index: 4;
+            pointer-events: none;
+            filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.35));
+        }
+
+        .envelope-stage.is-open .envelope-flap {
+            transform: rotateX(180deg);
+            z-index: 0;
+        }
+
+        /* Fix A4: Satu tombol interaktif tunggal + properti scale terpisah agar tidak ditimpa floatSeal */
+        .winged-seal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            translate: -50% -46%;
+            scale: 1;
+            z-index: 6;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.35rem;
+            transition: scale 0.3s var(--ease-overshoot), opacity 0.35s ease;
+            animation: floatSeal 2.6s ease-in-out infinite;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        @media (hover: hover) {
+            .winged-seal:hover {
+                scale: 1.1;
+            }
+        }
+
+        .winged-seal:focus-visible {
+            scale: 1.08;
+            outline: 2px dashed var(--gold-light);
+            outline-offset: 4px;
+            border-radius: 50%;
+        }
+
+        .envelope-stage.is-open .winged-seal {
+            opacity: 0;
+            pointer-events: none;
+            scale: 0.65;
+        }
+
+        @keyframes floatSeal {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        /* Partikel hati-hati kecil meletup dari segel saat amplop dibuka (C) */
+        .seal-burst-heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 1.1rem;
+            pointer-events: none;
+            z-index: 10;
+            animation: burstHeart 0.9s var(--ease-smooth) forwards;
+        }
+
+        @keyframes burstHeart {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(0.4);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.25) rotate(var(--rot));
+            }
+        }
+
+        .envelope-recipient {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+
+        .envelope-recipient p {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.08rem;
+            color: var(--pink);
+        }
+
+        .envelope-recipient h2 {
+            font-family: var(--font-script);
+            font-size: 1.95rem;
+            color: var(--gold-light);
+            margin-top: 0.15rem;
+        }
+
+        /* ==========================================================================
+       SECTION 2: HAPPY BIRTHDAY (FIX B4: PISAHKAN JUDUL & NAMA)
+       ========================================================================== */
+        .hero-heading-group {
+            text-align: center;
+            margin-bottom: 0.35rem;
+        }
+
+        .hero-main-script {
+            font-family: var(--font-script);
+            font-size: clamp(2.55rem, 10vw, 3.25rem);
+            line-height: 1.08;
+            color: var(--maroon);
+            display: block;
+        }
+
+        /* Animasi huruf per huruf saat masuk (C) */
+        .hero-char {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(14px) scale(0.85);
+            transition: opacity 0.45s ease, transform 0.45s var(--ease-overshoot);
+            transition-delay: calc(var(--char-i, 0) * 38ms);
+        }
+
+        .reveal.is-visible .hero-char {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .hero-recipient-name {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            font-size: clamp(1.25rem, 4.8vw, 1.5rem);
+            color: var(--ink);
+            letter-spacing: 0.03em;
+            margin-top: 0.2rem;
+            display: block;
+        }
+
+        .hero-polaroid {
+            width: 100%;
+            max-width: 272px;
+            transform: rotate(-1.5deg);
+            margin: 0.75rem auto 1.25rem;
+        }
+
+        .hero-polaroid .polaroid-frame {
+            aspect-ratio: 4 / 4.3;
+        }
+
+        .hero-date-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            background: var(--maroon);
+            color: var(--cream);
+            font-family: var(--font-type);
+            font-size: 0.84rem;
+            padding: 0.45rem 1.05rem;
+            border-radius: 999px;
+            border: 1.5px solid var(--gold);
+            box-shadow: 0 4px 12px rgba(56, 12, 19, 0.22);
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-subtext {
+            font-family: var(--font-serif);
+            font-size: 1.18rem;
+            font-style: italic;
+            color: var(--ink-muted);
+            text-align: center;
+            max-width: 320px;
+        }
+
+        /* Confetti canvas overlay ringan */
+        .confetti-layer {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 8;
+            overflow: hidden;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            top: -12px;
+            width: 8px;
+            height: 12px;
+            border-radius: 2px;
+            opacity: 0.9;
+            animation: confettiFall var(--dur, 2.8s) linear forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(105vh) rotate(540deg);
+                opacity: 0;
+            }
+        }
+
+        /* ==========================================================================
+       SECTION 3: ONE OF MY FAVORITE MOMENTS (ORGANIC OVERLAPPING COLLAGE - B3)
+       ========================================================================== */
+        .collage-organic {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            width: 100%;
+            margin-top: 0.35rem;
+            padding: 0 0.25rem;
+        }
+
+        .collage-item {
+            cursor: zoom-in;
+            padding: 0.4rem 0.4rem 1.35rem;
+            transition:
+                opacity 0.7s ease,
+                translate 0.7s var(--ease-smooth),
+                scale 0.7s var(--ease-overshoot),
+                transform 0.32s var(--ease-overshoot),
+                box-shadow 0.32s ease;
+        }
+
+        /* Ukuran bervariasi & margin negatif agar saling menimpa alami */
+        .collage-item:nth-child(1) {
+            grid-column: 1 / 8;
+            transform: rotate(-4.5deg);
+            z-index: 2;
+        }
+
+        .collage-item:nth-child(2) {
+            grid-column: 6 / 13;
+            margin-top: -1.15rem;
+            transform: rotate(3.8deg);
+            z-index: 3;
+        }
+
+        .collage-item:nth-child(3) {
+            grid-column: 1 / 7;
+            margin-top: -1.35rem;
+            transform: rotate(2.6deg);
+            z-index: 2;
+        }
+
+        .collage-item:nth-child(4) {
+            grid-column: 6 / 13;
+            margin-top: -0.95rem;
+            transform: rotate(-3.4deg);
+            z-index: 4;
+        }
+
+        .collage-item:nth-child(5) {
+            grid-column: 3 / 11;
+            margin-top: -1.2rem;
+            transform: rotate(1.8deg);
+            z-index: 3;
+        }
+
+        /* Fix B8: Hover hanya di perangkat dengan pointer hover */
+        @media (hover: hover) {
+            .collage-item:hover {
+                transform: scale(1.06) rotate(0deg);
+                z-index: 10;
+                box-shadow: 0 14px 28px rgba(28, 3, 8, 0.35);
+            }
+        }
+
+        .collage-hint {
+            font-family: var(--font-type);
+            font-size: 0.76rem;
+            color: var(--cream-soft);
+            margin-top: 1.1rem;
+        }
+
+        /* ==========================================================================
+       SECTION 4: THIS SONG REMINDS ME OF YOU (VINYL + TONEARM + PULSE - C)
+       ========================================================================== */
+        .vinyl-card {
+            width: 100%;
+            max-width: 350px;
+            padding: 1.75rem 1.25rem;
+            border-radius: 16px;
+            border: 1.5px solid var(--gold);
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .vinyl-stage {
+            position: relative;
+            width: 215px;
+            height: 198px;
+            margin: 0.35rem 0 1.15rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Pita pink di atas vinyl */
+        .vinyl-ribbon {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            width: 82px;
+            height: 42px;
+            pointer-events: none;
+        }
+
+        /* Ring berdenyut saat lagu diputar */
+        .vinyl-pulse-ring {
+            position: absolute;
+            width: 184px;
+            height: 184px;
+            border-radius: 50%;
+            border: 2px solid var(--pink-dark);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .vinyl-stage.is-playing .vinyl-pulse-ring {
+            animation: vinylPulse 2s ease-out infinite;
+        }
+
+        @keyframes vinylPulse {
+            0% {
+                transform: scale(0.98);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: scale(1.22);
+                opacity: 0;
+            }
+        }
+
+        /* Piringan vinyl (berakselerasi via Web Animations API playbackRate) */
+        .vinyl-disc {
+            width: 182px;
+            height: 182px;
+            border-radius: 50%;
+            background:
+                radial-gradient(circle at center,
+                    var(--pink) 0%,
+                    var(--pink) 24%,
+                    var(--gold) 24.5%,
+                    var(--gold) 26%,
+                    #191416 26.5%,
+                    #261F22 36%,
+                    #141012 37%,
+                    #241D20 48%,
+                    #141012 49%,
+                    #261E21 62%,
+                    #141012 63%,
+                    #1F191B 100%);
+            box-shadow: 0 12px 26px rgba(0, 0, 0, 0.35), inset 0 0 0 2px rgba(255, 255, 255, 0.08);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateX(-28px);
+            transition: transform 0.9s var(--ease-smooth);
+        }
+
+        .reveal.is-visible .vinyl-disc {
+            transform: translateX(0);
+        }
+
+        .vinyl-disc::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: conic-gradient(from 35deg,
+                    transparent 0deg,
+                    rgba(255, 255, 255, 0.15) 25deg,
+                    transparent 55deg,
+                    transparent 180deg,
+                    rgba(255, 255, 255, 0.13) 205deg,
+                    transparent 235deg);
+        }
+
+        .vinyl-disc::after {
+            content: "";
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--cream);
+            border: 2px solid var(--maroon);
+            z-index: 2;
+        }
+
+        /* Tonearm pemutar piringan yang berayun turun saat play */
+        .vinyl-tonearm {
+            position: absolute;
+            top: 10px;
+            right: 4px;
+            width: 58px;
+            height: 118px;
+            z-index: 6;
+            transform-origin: 42px 16px;
+            transform: rotate(-28deg);
+            transition: transform 0.65s var(--ease-smooth);
+            pointer-events: none;
+        }
+
+        .vinyl-stage.is-playing .vinyl-tonearm {
+            transform: rotate(6deg);
+        }
+
+        .song-title {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            font-size: 1.32rem;
+            color: var(--maroon);
+        }
+
+        .song-artist {
+            font-family: var(--font-type);
+            font-size: 0.8rem;
+            color: var(--ink-muted);
+            margin-bottom: 0.85rem;
+        }
+
+        .audio-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: var(--font-type);
+            font-size: 0.75rem;
+            color: var(--maroon);
+            background: rgba(234, 184, 188, 0.35);
+            border: 1px dashed rgba(130, 27, 40, 0.35);
+            padding: 0.3rem 0.75rem;
+            border-radius: 999px;
+            margin-bottom: 0.85rem;
+        }
+
+        .audio-status-badge.is-blocked {
+            color: var(--maroon-dark);
+            background: rgba(201, 162, 77, 0.25);
+            border-color: var(--gold);
+        }
+
+        .btn-audio {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            background: var(--maroon);
+            color: var(--cream);
+            border: 1.5px solid var(--gold);
+            padding: 0.68rem 1.4rem;
+            border-radius: 999px;
+            font-family: var(--font-type);
+            font-size: 0.85rem;
+            cursor: pointer;
+            box-shadow: 0 6px 16px rgba(130, 27, 40, 0.28);
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        @media (hover: hover) {
+            .btn-audio:hover {
+                background: var(--maroon-dark);
+                transform: translateY(-2px);
+            }
+        }
+
+        .song-note {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 0.98rem;
+            color: var(--ink-muted);
+            margin-top: 0.85rem;
+        }
+
+        /* ==========================================================================
+       SECTION 5: REASONS I LOVE YOU (2x2 FLIP CARDS - C)
+       ========================================================================== */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.95rem;
+            width: 100%;
+            perspective: 900px;
+        }
+
+        .reason-card {
+            padding: 0.95rem 0.75rem;
+            border-radius: 14px;
+            border: 1px solid rgba(201, 162, 77, 0.6);
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            transform: rotateY(-75deg) translateY(16px);
+            transition: opacity 0.65s ease, transform 0.75s var(--ease-overshoot);
+            transition-delay: calc(var(--i, 0) * 110ms);
+        }
+
+        .reason-card.is-visible {
+            opacity: 1;
+            transform: rotateY(0deg) translateY(0);
+        }
+
+        .reason-avatar {
+            width: 84px;
+            height: 84px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--pink);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            margin-bottom: 0.6rem;
+            background: #EADCCB;
+        }
+
+        .reason-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .reason-num {
+            font-family: var(--font-type);
+            font-size: 0.78rem;
+            color: var(--maroon-light);
+            margin-bottom: 0.2rem;
+        }
+
+        .reason-text {
+            font-family: var(--font-serif);
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.32;
+            color: var(--ink);
+        }
+
+        /* ==========================================================================
+       SECTION 6: THREE WORDS (FAN OUT + CLIP-PATH WIPE - C)
+       ========================================================================== */
+        .words-stack {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.6rem;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .word-card {
+            padding: 0.4rem 0.4rem 1.05rem;
+            opacity: 0;
+            transform: translateX(0) rotate(0deg) scale(0.88);
+            transition: opacity 0.6s ease, transform 0.75s var(--ease-overshoot);
+            transition-delay: calc(var(--i, 0) * 150ms);
+        }
+
+        .word-card:nth-child(1) {
+            transform: translateX(35%) rotate(0deg) scale(0.88);
+        }
+
+        .word-card:nth-child(3) {
+            transform: translateX(-35%) rotate(0deg) scale(0.88);
+        }
+
+        .word-card.is-visible:nth-child(1) {
+            opacity: 1;
+            transform: translateX(0) rotate(-3deg) scale(1);
+        }
+
+        .word-card.is-visible:nth-child(2) {
+            opacity: 1;
+            transform: translateX(0) rotate(1.2deg) translateY(-6px) scale(1);
+        }
+
+        .word-card.is-visible:nth-child(3) {
+            opacity: 1;
+            transform: translateX(0) rotate(3deg) scale(1);
+        }
+
+        .word-card .polaroid-frame {
+            aspect-ratio: 3 / 4;
+        }
+
+        .word-label {
+            font-family: var(--font-script);
+            font-size: 1.38rem;
+            font-weight: 700;
+            color: var(--maroon);
+            text-align: center;
+            margin-top: 0.4rem;
+            clip-path: inset(0 100% 0 0);
+            transition: clip-path 0.65s var(--ease-smooth) calc(var(--i, 0) * 150ms + 280ms);
+        }
+
+        .word-card.is-visible .word-label {
+            clip-path: inset(0 0% 0 0);
+        }
+
+        /* ==========================================================================
+       SECTION 7: A LETTER FOR YOU (FIX A5 LOCKED HEIGHT + B5/B6 RESPONSIVE STRIP)
+       ========================================================================== */
+        .letter-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+            align-items: center;
+        }
+
+        /* Strip fotobooth horizontal di atas surat agar kolom surat lega di HP 360px (Fix B6) */
+        .photobooth-strip {
+            background: var(--cream-soft);
+            padding: 0.5rem 0.55rem;
+            border-radius: 6px;
+            box-shadow: var(--shadow-card);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.45rem;
+            width: 100%;
+            max-width: 310px;
+            transform: rotate(-1.5deg);
+            border: 1px solid rgba(130, 27, 40, 0.14);
+        }
+
+        .photobooth-slot {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #EADCCB;
+            overflow: hidden;
+            border-radius: 3px;
+            opacity: 0;
+            transform: translateY(-18px);
+            transition: opacity 0.5s ease, transform 0.55s var(--ease-overshoot);
+            transition-delay: calc(var(--slot-i, 0) * 140ms + 250ms);
+        }
+
+        .photobooth-strip.is-visible .photobooth-slot {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .photobooth-slot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photobooth-stamp {
+            grid-column: span 3;
+            font-family: var(--font-type);
+            font-size: 0.75rem;
+            text-align: center;
+            color: var(--maroon);
+            letter-spacing: 0.1em;
+            padding-top: 0.15rem;
+        }
+
+        .letter-paper {
+            width: 100%;
+            padding: 1.45rem 1.2rem;
+            border-radius: 8px;
+            border: 1.5px solid rgba(201, 162, 77, 0.65);
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            transform-origin: top center;
+            transform: scaleY(0.92);
+            opacity: 0;
+            transition: transform 0.65s var(--ease-smooth), opacity 0.55s ease;
+        }
+
+        .letter-paper.is-visible {
+            transform: scaleY(1);
+            opacity: 1;
+        }
+
+        .letter-salutation {
+            font-family: var(--font-script);
+            font-size: 1.55rem;
+            color: var(--maroon);
+            margin-bottom: 0.65rem;
+        }
+
+        /* Fix A5 & B5: Teks penuh dirender tersembunyi untuk mengunci tinggi kertas sejak awal,
+       ukuran font ~14.4px (0.9rem) agar nyaman dibaca di HP */
+        .letter-body-wrap {
+            position: relative;
+            font-family: var(--font-type);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--ink);
+            white-space: pre-wrap;
+        }
+
+        .letter-ghost {
+            visibility: hidden;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .letter-live {
+            position: absolute;
+            inset: 0;
+        }
+
+        .type-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.05em;
+            background: var(--maroon);
+            vertical-align: middle;
+            margin-left: 1px;
+            animation: blinkCursor 0.8s infinite;
+        }
+
+        .type-cursor.is-done {
+            display: none;
+        }
+
+        @keyframes blinkCursor {
+
+            0%,
+            49% {
+                opacity: 1;
+            }
+
+            50%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* ==========================================================================
+       SECTION 8: THE LITTLE THINGS YOU DO (STAR POP STAGGER - C)
+       ========================================================================== */
+        .little-things-wrap {
+            width: 100%;
+            padding: 1.35rem 1.15rem;
+            border-radius: 14px;
+            border: 1.5px solid var(--gold);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .star-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .star-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.65rem;
+            font-family: var(--font-serif);
+            font-size: 1.08rem;
+            color: var(--ink);
+            line-height: 1.38;
+            opacity: 0;
+            transform: translateX(-14px);
+            transition: opacity 0.55s ease, transform 0.55s var(--ease-smooth);
+            transition-delay: calc(var(--i, 0) * 110ms + 120ms);
+        }
+
+        .star-list li.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .star-icon {
+            color: var(--gold);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+            display: inline-block;
+            transform: scale(0) rotate(-90deg);
+            transition: transform 0.55s var(--ease-overshoot);
+            transition-delay: calc(var(--i, 0) * 110ms);
+        }
+
+        .star-list li.is-visible .star-icon {
+            transform: scale(1) rotate(0deg);
+        }
+
+        .mini-polaroids-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        .mini-polaroids-row .polaroid {
+            padding: 0.4rem 0.4rem 1.2rem;
+        }
+
+        .mini-polaroids-row .polaroid:first-child {
+            transform: rotate(-2.5deg);
+        }
+
+        .mini-polaroids-row .polaroid:last-child {
+            transform: rotate(2.5deg);
+        }
+
+        /* ==========================================================================
+       SECTION 9: INVITATION (GOLD BORDER DRAW + DIGIT ROLL + RSVP/ICS - B9, C)
+       ========================================================================== */
+        .invite-card {
+            width: 100%;
+            padding: 1.85rem 1.3rem;
+            border-radius: 16px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 18px 40px rgba(28, 3, 8, 0.45);
+            text-align: center;
+            position: relative;
+        }
+
+        /* Border emas tergambar saat masuk viewport */
+        .invite-border-svg {
+            position: absolute;
+            inset: 6px;
+            width: calc(100% - 12px);
+            height: calc(100% - 12px);
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .invite-border-svg rect {
+            fill: none;
+            stroke: var(--gold);
+            stroke-width: 1.5;
+            stroke-dasharray: 1400;
+            stroke-dashoffset: 1400;
+            transition: stroke-dashoffset 1.5s var(--ease-smooth) 0.2s;
+        }
+
+        .reveal.is-visible .invite-border-svg rect {
+            stroke-dashoffset: 0;
+        }
+
+        .invite-badge {
+            font-family: var(--font-type);
+            font-size: 0.76rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--maroon);
+            margin-bottom: 0.35rem;
+        }
+
+        .invite-heading {
+            font-family: var(--font-script);
+            font-size: clamp(2.3rem, 8.5vw, 2.85rem);
+            color: var(--maroon);
+            line-height: 1.1;
+        }
+
+        .invite-guest {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            font-size: 1.32rem;
+            color: var(--ink);
+            margin: 0.45rem 0 0.85rem;
+        }
+
+        .invite-details {
+            background: rgba(234, 184, 188, 0.25);
+            border: 1px solid rgba(130, 27, 40, 0.16);
+            border-radius: 10px;
+            padding: 0.9rem;
+            margin-bottom: 1.1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            text-align: left;
+        }
+
+        .detail-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            font-size: 1rem;
+            color: var(--ink);
+        }
+
+        .detail-row strong {
+            font-family: var(--font-type);
+            font-size: 0.76rem;
+            color: var(--maroon);
+            min-width: 76px;
+            padding-top: 0.15rem;
+        }
+
+        /* Countdown dengan animasi digit roll */
+        .countdown-box {
+            margin: 0.9rem 0 1.25rem;
+        }
+
+        .countdown-label {
+            font-family: var(--font-type);
+            font-size: 0.76rem;
+            color: var(--ink-muted);
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.45rem;
+        }
+
+        .cd-unit {
+            background: var(--maroon);
+            color: var(--cream);
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            padding: 0.55rem 0.25rem;
+            overflow: hidden;
+        }
+
+        .cd-num {
+            font-family: var(--font-type);
+            font-size: 1.28rem;
+            color: var(--gold-light);
+            display: block;
+            line-height: 1.15;
+        }
+
+        .cd-num.is-rolling {
+            animation: digitRoll 0.35s var(--ease-overshoot);
+        }
+
+        @keyframes digitRoll {
+            0% {
+                transform: translateY(-65%);
+                opacity: 0.25;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Fix B5: Ukuran teks satuan countdown minimal 12px (0.75rem) */
+        .cd-text {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--pink);
+        }
+
+        .countdown-done {
+            font-family: var(--font-script);
+            font-size: 1.65rem;
+            color: var(--maroon);
+            padding: 0.6rem;
+            background: rgba(201, 162, 77, 0.22);
+            border-radius: 8px;
+        }
+
+        /* Tombol Aksi Undangan: RSVP WhatsApp + Add to Calendar (.ics) (Fix B9) */
+        .invite-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            position: relative;
+            z-index: 4;
+        }
+
+        .btn-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 999px;
+            font-family: var(--font-type);
+            font-size: 0.84rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--maroon);
+            color: var(--cream);
+            border: 1.5px solid var(--gold);
+            box-shadow: 0 6px 15px rgba(130, 27, 40, 0.28);
+        }
+
+        .btn-secondary {
+            background: var(--cream-soft);
+            color: var(--maroon);
+            border: 1.5px solid var(--maroon);
+        }
+
+        @media (hover: hover) {
+            .btn-action:hover {
+                transform: translateY(-2px);
+            }
+        }
+
+        /* ==========================================================================
+       6. HIRONO COUPLE STICKERS
+       ========================================================================== */
+        .hirono-sticker {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            user-select: none;
+            filter: drop-shadow(0 6px 10px rgba(34, 3, 9, 0.25));
+            animation: hironoBob 3.6s ease-in-out infinite;
+        }
+
+        .hirono-couple-card {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(252, 247, 240, 0.95);
+            border: 2px solid var(--gold);
+            border-radius: 12px;
+            padding: 0.25rem 0.35rem;
+            box-shadow: 0 6px 14px rgba(34, 3, 9, 0.22);
+        }
+
+        .hirono-couple-card img {
+            width: 78px;
+            height: 60px;
+            object-fit: contain;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .hirono-couple-tag {
+            position: absolute;
+            bottom: -8px;
+            background: var(--maroon);
+            color: var(--gold-light);
+            border: 1px solid var(--gold);
+            font-family: var(--font-hand);
+            font-size: 0.72rem;
+            padding: 0.01rem 0.48rem;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+
+        .hirono-sticker.corner-br {
+            position: absolute;
+            right: 0.6rem;
+            bottom: 0.6rem;
+            z-index: 3;
+        }
+
+        .hirono-sticker.corner-bl {
+            position: absolute;
+            left: 0.6rem;
+            bottom: 0.6rem;
+            z-index: 3;
+        }
+
+        /* Beri ruang bawah yang lega pada section berstiker corner agar konten tidak tertutup */
+        #sec-birthday,
+        #sec-moments,
+        #sec-song,
+        #sec-three-words,
+        #sec-little-things {
+            padding-bottom: 5.5rem;
+        }
+
+        .hirono-sticker.inline-top {
+            margin-bottom: 0.55rem;
+        }
+
+        .hirono-sticker.inline-bottom {
+            margin-top: 0.85rem;
+        }
+
+        @keyframes hironoBob {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-1.5deg);
+            }
+
+            50% {
+                transform: translateY(-5px) rotate(1.5deg);
+            }
+        }
+
+        /* ==========================================================================
+       7. LIGHTBOX MODAL (SWIPE LEFT/RIGHT + FOCUS MANAGEMENT - B10)
+       ========================================================================== */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(28, 3, 8, 0.93);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            touch-action: pan-y;
+        }
+
+        .lightbox.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-card {
+            background: var(--cream-soft);
+            padding: 0.75rem 0.75rem 1.65rem;
+            border-radius: 6px;
+            max-width: 90vw;
+            max-height: 80vh;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            position: relative;
+            transition: transform 0.25s ease;
+        }
+
+        .lightbox-card img {
+            max-width: 100%;
+            max-height: 58vh;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .lightbox-caption {
+            font-family: var(--font-hand);
+            font-size: 1.35rem;
+            color: var(--ink);
+            margin-top: 0.6rem;
+        }
+
+        .lightbox-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .lightbox-btn {
+            background: var(--maroon);
+            color: var(--cream);
+            border: 1px solid var(--gold);
+            padding: 0.5rem 1.15rem;
+            border-radius: 999px;
+            font-family: var(--font-type);
+            font-size: 0.82rem;
+            cursor: pointer;
+        }
+
+        /* ==========================================================================
+       8. SCROLL REVEAL VARIATIONS & STAGGER (SNIPPET D2 & D3)
+       ========================================================================== */
+        .reveal {
+            opacity: 0;
+            translate: 0 24px;
+            transition:
+                opacity 0.7s ease,
+                translate 0.7s var(--ease-smooth),
+                scale 0.7s var(--ease-overshoot);
+            transition-delay: calc(var(--i, 0) * 100ms);
+        }
+
+        .reveal[data-anim="left"] {
+            translate: -48px 0;
+        }
+
+        .reveal[data-anim="right"] {
+            translate: 48px 0;
+        }
+
+        .reveal[data-anim="drop"] {
+            translate: 0 -65px;
+        }
+
+        .reveal[data-anim="pop"] {
+            translate: 0 0;
+            scale: 0.6;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            translate: 0 0;
+            scale: 1;
+        }
+
+        /* Progressive enhancement: scroll-driven exit animation (Snippet D3) */
+        @supports (animation-timeline: view()) {
+            .section-inner.is-visible {
+                animation: leave linear both;
+                animation-timeline: view();
+                animation-range: exit 0% exit 70%;
+            }
+
+            @keyframes leave {
+                to {
+                    opacity: 0.2;
+                    scale: 0.94;
+                    translate: 0 -28px;
+                }
+            }
+        }
+
+        /* Matikan semua animasi untuk prefers-reduced-motion */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .reveal,
+            .reason-card,
+            .word-card,
+            .letter-paper,
+            .photobooth-slot,
+            .star-list li,
+            .star-icon,
+            .hero-char {
+                opacity: 1 !important;
+                translate: none !important;
+                scale: 1 !important;
+                transform: none !important;
+                clip-path: none !important;
+                transition: none !important;
+            }
+
+            .winged-seal,
+            .type-cursor,
+            .hirono-sticker,
+            .vinyl-pulse-ring,
+            .bunting-wrap {
+                animation: none !important;
+            }
+
+            .envelope-flap,
+            .envelope-letter-peek,
+            .vinyl-disc,
+            .vinyl-tonearm {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Progress bar atas -->
+    <div class="scroll-progress" aria-hidden="true">
+        <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+    </div>
+
+    <!-- Dot navigasi samping -->
+    <nav class="side-dots" id="sideDots" aria-label="Navigasi halaman"></nav>
+
+    <main id="scrapbook-app">
+
+        <!-- ======================================================================
+         1. COVER AMPLOP (MAROON)
+         ====================================================================== -->
+        <section id="sec-envelope" class="theme-maroon" aria-label="Amplop Undangan">
+            <div class="section-inner">
+                <span class="tag-typewriter">A Little Scrapbook For You</span>
+                <p class="envelope-hint">Sentuh segel hati bersayap untuk membuka</p>
+
+                <!-- Fix A4: Satu kontrol interaktif tunggal (.winged-seal button) tanpa nested button -->
+                <div class="envelope-stage" id="envelopeStage">
+                    <div class="envelope-body">
+                        <!-- Surat mengintip di dalam amplop -->
+                        <div class="envelope-letter-peek">
+                            <span
+                                style="font-family: var(--font-type); font-size: 0.72rem; letter-spacing: 0.12em;">SPECIAL
+                                EDITION</span>
+                            <span
+                                style="font-family: var(--font-script); font-size: 1.65rem; margin-top: 0.25rem;">Happy
+                                Birthday</span>
+                            <span
+                                style="font-family: var(--font-serif); font-style: italic; font-size: 1rem; color: var(--ink-muted);">Nasywa
+                                Anggieta Tiara</span>
+                        </div>
+
+                        <!-- Lipatan bawah & samping -->
+                        <div class="envelope-pocket"></div>
+                    </div>
+
+                    <!-- Fix A3: Flap 3D berada di luar .envelope-body agar tidak terpotong -->
+                    <div class="envelope-flap"></div>
+
+                    <!-- Segel Hati Bersayap "open me" -->
+                    <button type="button" class="winged-seal" id="openEnvelopeBtn" aria-label="Buka amplop undangan">
+                        <svg width="118" height="74" viewBox="0 0 118 74" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M44 37C31 21 12 18 3 25C11 28 16 32 19 36C10 36 5 39 2 43C11 44 18 46 23 49C15 51 11 54 9 57C18 56 30 51 44 43V37Z"
+                                fill="#FCF7F0" stroke="#C9A24D" stroke-width="1.5" stroke-linejoin="round" />
+                            <path
+                                d="M74 37C87 21 106 18 115 25C107 28 102 32 99 36C108 36 113 39 116 43C107 44 100 46 95 49C103 51 107 54 109 57C100 56 88 51 74 43V37Z"
+                                fill="#FCF7F0" stroke="#C9A24D" stroke-width="1.5" stroke-linejoin="round" />
+                            <path
+                                d="M59 61C59 61 36 46.5 36 29.5C36 22.5 41.5 17 48.2 17C52.6 17 56.5 19.3 59 22.8C61.5 19.3 65.4 17 69.8 17C76.5 17 82 22.5 82 29.5C82 46.5 59 61 59 61Z"
+                                fill="#A61C2E" stroke="#C9A24D" stroke-width="2.2" stroke-linejoin="round" />
+                            <text x="59" y="37" text-anchor="middle" fill="#FCF7F0" font-family="'Caveat', cursive"
+                                font-size="14" font-weight="700">open me</text>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="envelope-recipient">
+                    <p>Untuk yang tersayang,</p>
+                    <h2 id="envRecipientName">Nasywa Anggieta Tiara</h2>
+                </div>
+
+                <!-- Hirono Couple 1 -->
+                <div class="hirono-sticker inline-bottom" id="hironoSlot0" aria-hidden="true"></div>
+            </div>
+        </section>
+
+        <!-- ======================================================================
+         2. HAPPY BIRTHDAY (CREAM PAPER - RITME SELANG-SELING)
+         ====================================================================== -->
+        <section id="sec-birthday" class="theme-cream" aria-label="Happy Birthday">
+            <div class="confetti-layer" id="heroConfetti" aria-hidden="true"></div>
+
+            <div class="section-inner reveal">
+                <!-- Bunting "Happy Birthday" SVG -->
+                <div class="bunting-wrap" aria-hidden="true">
+                    <svg viewBox="0 0 400 72" width="100%" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 10 Q 200 44 390 10" stroke="#C88288" stroke-width="1.8" fill="none"
+                            stroke-dasharray="4 3" />
+                        <polygon points="32,15 56,18 44,44" fill="#821B28" stroke="#C9A24D" stroke-width="1" />
+                        <text x="44" y="29" text-anchor="middle" fill="#FCF7F0" font-family="Special Elite, monospace"
+                            font-size="10">H</text>
+
+                        <polygon points="66,20 90,23 78,49" fill="#EAB8BC" stroke="#C9A24D" stroke-width="1" />
+                        <text x="78" y="34" text-anchor="middle" fill="#821B28" font-family="Special Elite, monospace"
+                            font-size="10">A</text>
+
+                        <polygon points="100,24 124,26 112,52" fill="#821B28" stroke="#C9A24D" stroke-width="1" />
+                        <text x="112" y="38" text-anchor="middle" fill="#FCF7F0" font-family="Special Elite, monospace"
+                            font-size="10">P</text>
+
+                        <polygon points="134,27 158,28 146,54" fill="#EAB8BC" stroke="#C9A24D" stroke-width="1" />
+                        <text x="146" y="40" text-anchor="middle" fill="#821B28" font-family="Special Elite, monospace"
+                            font-size="10">P</text>
+
+                        <polygon points="168,29 192,29 180,55" fill="#821B28" stroke="#C9A24D" stroke-width="1" />
+                        <text x="180" y="41" text-anchor="middle" fill="#FCF7F0" font-family="Special Elite, monospace"
+                            font-size="10">Y</text>
+
+                        <rect x="202" y="34" width="22" height="14" rx="2" fill="#EAB8BC" stroke="#821B28"
+                            stroke-width="1.2" />
+                        <rect x="211" y="24" width="4" height="10" fill="#821B28" />
+                        <path d="M213 17C215.5 20 215.5 22.5 213 24C210.5 22.5 210.5 20 213 17Z" fill="#E09F3E" />
+
+                        <ellipse cx="252" cy="30" rx="8" ry="10" fill="#821B28" stroke="#C9A24D" stroke-width="1" />
+                        <path d="M252 40Q250 48 253 54" stroke="#821B28" stroke-width="1" fill="none" />
+
+                        <ellipse cx="276" cy="27" rx="8" ry="10" fill="#EAB8BC" stroke="#C9A24D" stroke-width="1" />
+                        <path d="M276 37Q279 45 275 52" stroke="#821B28" stroke-width="1" fill="none" />
+
+                        <path d="M312 22L314 27L319 27L315 30L316.5 35L312 32L307.5 35L309 30L305 27L310 27Z"
+                            fill="#C9A24D" />
+                        <path
+                            d="M348 24C346 21 341 21.5 340 25C339 28.5 348 33 348 33C348 33 357 28.5 356 25C355 21.5 350 21 348 24Z"
+                            fill="#821B28" />
+                    </svg>
+                </div>
+
+                <!-- Fix B4: Judul script besar & nama baris tersendiri -->
+                <h1 class="hero-heading-group">
+                    <span class="hero-main-script" id="heroMainScript">Happy Birthday</span>
+                    <span class="hero-recipient-name" id="heroRecipientName">Nasywa Anggieta Tiara</span>
+                </h1>
+
+                <div class="polaroid hero-polaroid reveal" data-anim="drop" style="--i: 2;">
+                    <div class="tape top-center"></div>
+                    <div class="polaroid-frame" id="heroPhotoBox"></div>
+                    <div class="polaroid-caption" id="heroCaption">Our favorite chapter ✨</div>
+                </div>
+
+                <div class="hero-date-badge reveal" data-anim="pop" style="--i: 4;" id="heroDateBadge">🗓️ 21 November
+                    2026 </div>
+                <p class="hero-subtext">from your bf</p>
+            </div>
+
+            <!-- Hirono Couple 2 -->
+            <div class="hirono-sticker corner-br" id="hironoSlot1" aria-hidden="true"></div>
+        </section>
+
+        <!-- ======================================================================
+         3. ONE OF MY FAVORITE MOMENTS (MAROON + OVERLAPPING COLLAGE)
+         ====================================================================== -->
+        <section id="sec-moments" class="theme-maroon" aria-label="One of My Favorite Moments">
+            <div class="section-inner reveal">
+                <span class="tag-typewriter">Scrapbook Memories</span>
+                <h2 class="title-script">One of My Favorite Moments</h2>
+                <p class="subtitle-serif">Potongan hari yang selalu bikin aku senyum sendiri.</p>
+
+                <div class="collage-organic" id="momentsGrid"></div>
+
+                <p class="collage-hint">✦ Ketuk foto untuk memperbesar ✦</p>
+            </div>
+
+            <!-- Hirono Couple 3 -->
+            <div class="hirono-sticker corner-bl" id="hironoSlot2" aria-hidden="true"></div>
+        </section>
+
+        <!-- ======================================================================
+         4. THIS SONG REMINDS ME OF YOU (CREAM PAPER + TONEARM + WEB ANIMATIONS)
+         ====================================================================== -->
+        <section id="sec-song" class="theme-cream" aria-label="This Song Reminds Me of You">
+            <div class="section-inner reveal">
+                <span class="tag-typewriter">Soundtrack of Us</span>
+                <h2 class="title-script">This Song Reminds Me of You</h2>
+
+                <div class="vinyl-card paper-surface">
+                    <div class="tape top-left gold"></div>
+                    <div class="tape top-right gold"></div>
+
+                    <div class="vinyl-stage" id="vinylStage">
+                        <!-- Pita pink di atas vinyl -->
+                        <svg class="vinyl-ribbon" viewBox="0 0 90 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M45 24L18 10L23 23L13 33L45 28Z" fill="#EAB8BC" stroke="#C88288"
+                                stroke-width="1.2" />
+                            <path d="M45 24L72 10L67 23L77 33L45 28Z" fill="#EAB8BC" stroke="#C88288"
+                                stroke-width="1.2" />
+                            <circle cx="45" cy="25" r="7.5" fill="#FCF7F0" stroke="#C9A24D" stroke-width="1.5" />
+                        </svg>
+
+                        <div class="vinyl-pulse-ring" aria-hidden="true"></div>
+                        <div class="vinyl-disc" id="vinylDisc" aria-label="Piringan vinyl berputar"></div>
+
+                        <!-- Tonearm pemutar piringan -->
+                        <svg class="vinyl-tonearm" viewBox="0 0 60 120" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true">
+                            <circle cx="42" cy="16" r="10" fill="#C9A24D" stroke="#68131E" stroke-width="2" />
+                            <circle cx="42" cy="16" r="4" fill="#FCF7F0" />
+                            <path d="M42 24L35 76L20 100" stroke="#821B28" stroke-width="3.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <rect x="13" y="96" width="11" height="16" rx="2" transform="rotate(28 13 96)"
+                                fill="#C9A24D" stroke="#68131E" stroke-width="1.2" />
+                        </svg>
+                    </div>
+
+                    <div class="song-title" id="songTitle">Lagu Spesial Untukmu</div>
+                    <div class="song-artist" id="songArtist">Putar saat kamu membaca ini</div>
+
+                    <div class="audio-status-badge" id="audioStatusBadge" role="status" aria-live="polite">
+                        <span id="audioStatusDot">●</span>
+                        <span id="audioStatusText">Memeriksa izin putar audio...</span>
+                    </div>
+
+                    <audio id="bgAudio" preload="auto"></audio>
+
+                    <button type="button" class="btn-audio" id="toggleAudioBtn" aria-pressed="false">
+                        <span id="audioIcon">▶</span>
+                        <span id="audioLabel">Play Song</span>
+                    </button>
+
+                    <p class="song-note" id="songNote">Setiap nadanya terasa seperti hangatnya kehadiranmu.</p>
+                </div>
+            </div>
+
+            <!-- Hirono Couple 4 -->
+            <div class="hirono-sticker corner-br" id="hironoSlot3" aria-hidden="true"></div>
+        </section>
+
+        <!-- ======================================================================
+         5. REASONS I LOVE YOU (MAROON + 2x2 FLIP CARDS)
+         ====================================================================== -->
+        <section id="sec-reasons" class="theme-maroon" aria-label="Reasons I Love You">
+            <div class="section-inner reveal">
+                <span class="tag-typewriter">Four Little Notes</span>
+                <h2 class="title-script">Reasons I Love You</h2>
+                <p class="subtitle-serif">Hal-hal sederhana yang bikin aku jatuh hati lagi dan lagi.</p>
+
+                <div class="reasons-grid" id="reasonsGrid"></div>
+            </div>
+        </section>
+
+        <!-- ======================================================================
+         6. IF I HAD TO DESCRIBE YOU IN THREE WORDS (CREAM PAPER + FAN OUT)
+         ====================================================================== -->
+        <section id="sec-three-words" class="theme-cream" aria-label="If I Had To Describe You In Three Words">
+            <div class="section-inner reveal">
+                <span class="tag-typewriter">In Three Words</span>
+                <h2 class="title-script">If I Had To Describe You</h2>
+                <p class="subtitle-serif">Tiga kata yang paling mewakili dirimu di mataku.</p>
+
+                <div class="words-stack" id="threeWordsGrid"></div>
+            </div>
+
+            <!-- Hirono Couple 5 -->
+            <div class="hirono-sticker corner-bl" id="hironoSlot4" aria-hidden="true"></div>
+        </section>
+
+        <!-- ======================================================================
+         7. A LETTER FOR YOU (MAROON + LOCKED-HEIGHT TYPEWRITER)
+         ====================================================================== -->
+        <section id="sec-letter" class="theme-maroon" aria-label="A Letter For You">
+            <div class="section-inner reveal">
+                <span class="tag-typewriter">Handwritten Vibe</span>
+                <h2 class="title-script">A Letter For You</h2>
+
+                <div class="letter-layout">
+                    <aside class="photobooth-strip" id="photoboothStrip" aria-label="Strip foto fotobooth">
+                        <div class="photobooth-slot" id="pbSlot1" style="--slot-i: 0;"></div>
+                        <div class="photobooth-slot" id="pbSlot2" style="--slot-i: 1;"></div>
+                        <div class="photobooth-slot" id="pbSlot3" style="--slot-i: 2;"></div>
+                        <div class="photobooth-stamp">♥ PHOTOBOOTH MEMORIES ♥</div>
+                    </aside>
+
+                    <div class="letter-paper paper-surface" id="letterPaper">
+                        <div class="tape top-center"></div>
+                        <div class="letter-salutation" id="letterSalutation">Untuk Nasywa,</div>
+                        <div class="letter-body-wrap">
+                            <div class="letter-ghost" id="letterGhost" aria-hidden="true"></div>
+                            <div class="letter-live" id="letterTypewriter"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================================================================
+         8. THE LITTLE THINGS YOU DO THAT MAKE ME SMILE (CREAM PAPER)
+         ====================================================================== -->
+        <section id="sec-little-things" class="theme-cream" aria-label="The Little Things You Do That Make Me Smile">
+            <div class="section-inner reveal">
+                <span class="tag-typewriter">Daily Warmth</span>
+                <h2 class="title-script">The Little Things You Do</h2>
+                <p class="subtitle-serif">Detail kecil darimu yang selalu bikin hariku lebih cerah.</p>
+
+                <div class="little-things-wrap paper-surface">
+                    <ul class="star-list" id="littleThingsList"></ul>
+                    <div class="mini-polaroids-row" id="littleThingsPhotos"></div>
+                </div>
+            </div>
+
+            <!-- Hirono Couple 6 -->
+            <div class="hirono-sticker corner-br" id="hironoSlot5" aria-hidden="true"></div>
+        </section>
+
+        <!-- ======================================================================
+         9. INVITATION (MAROON + RSVP WHATSAPP + ADD TO CALENDAR .ICS)
+         ====================================================================== -->
+        <section id="sec-invitation" class="theme-maroon" aria-label="Birthday Invitation">
+            <div class="confetti-layer" id="inviteConfetti" aria-hidden="true"></div>
+
+            <div class="section-inner reveal" data-anim="pop">
+                <div class="invite-card paper-surface">
+                    <!-- Gold animated border -->
+                    <svg class="invite-border-svg" viewBox="0 0 360 520" preserveAspectRatio="none" aria-hidden="true">
+                        <rect x="2" y="2" width="356" height="516" rx="11" />
+                    </svg>
+
+                    <!-- Hirono Couple 7 -->
+                    <div class="hirono-sticker inline-top" id="hironoSlot6" aria-hidden="true"></div>
+
+                    <div class="invite-badge">✦ Special Birthday Invitation ✦</div>
+                    <h2 class="invite-heading">You’re Invited</h2>
+                    <p class="invite-guest" id="inviteName">Nasywa Anggieta Tiara</p>
+
+                    <div class="divider-ornament">
+                        <span class="line"></span>
+                        <span>🎂</span>
+                        <span class="line"></span>
+                    </div>
+
+                    <div class="invite-details">
+                        <div class="detail-row">
+                            <strong>TANGGAL</strong>
+                            <span id="inviteDateText">28 November 2026</span>
+                        </div>
+                        <div class="detail-row">
+                            <strong>WAKTU</strong>
+                            <span id="inviteTimeText">19.00 WIB</span>
+                        </div>
+                        <div class="detail-row">
+                            <strong>LOKASI</strong>
+                            <span id="inviteLocationText">Dijemput Prince Gery</span>
+                        </div>
+                        <div class="detail-row" id="inviteDressRow">
+                            <strong>CATATAN</strong>
+                            <span id="inviteNotesText"></span>
+                        </div>
+                    </div>
+
+                    <!-- Real-time Countdown -->
+                    <div class="countdown-box">
+                        <div class="countdown-label">Menuju Hari Spesial</div>
+                        <div class="countdown-grid" id="countdownGrid">
+                            <div class="cd-unit"><span class="cd-num" id="cdDays">00</span><span
+                                    class="cd-text">Hari</span></div>
+                            <div class="cd-unit"><span class="cd-num" id="cdHours">00</span><span
+                                    class="cd-text">Jam</span></div>
+                            <div class="cd-unit"><span class="cd-num" id="cdMinutes">00</span><span
+                                    class="cd-text">Menit</span></div>
+                            <div class="cd-unit"><span class="cd-num" id="cdSeconds">00</span><span
+                                    class="cd-text">Detik</span></div>
+                        </div>
+                        <div class="countdown-done" id="countdownDone" style="display: none;">
+                            Hari yang ditunggu telah tiba 🎉
+                        </div>
+                    </div>
+
+                    <!-- Tombol Aksi Undangan: RSVP WhatsApp -->
+                    <div class="invite-actions">
+                        <a href="#" class="btn-action btn-primary" id="rsvpBtn" target="_blank"
+                            rel="noopener noreferrer">
+                            💌 Konfirmasi via WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========================================================================
+       LIGHTBOX MODAL
+       ======================================================================== -->
+    <div class="lightbox" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Pratinjau foto">
+        <div class="lightbox-card">
+            <img id="lightboxImg" src="" alt="" />
+            <p class="lightbox-caption" id="lightboxCaption"></p>
+        </div>
+        <div class="lightbox-nav">
+            <button type="button" class="lightbox-btn" id="lightboxPrev" aria-label="Foto sebelumnya">← Prev</button>
+            <button type="button" class="lightbox-btn" id="lightboxClose">Tutup ✕</button>
+            <button type="button" class="lightbox-btn" id="lightboxNext" aria-label="Foto berikutnya">Next →</button>
+        </div>
+    </div>
+
+    <script>
+        /* ========================================================================
+           CONFIG DATA UTAMA (SILAKAN SESUAIKAN DI SINI)
+           ======================================================================== */
+        const CONFIG = {
+            recipientName: "Nasywa Anggieta Tiara",
+            // Format ISO dengan zona waktu WIB (+07:00)
+            eventDate: "2026-11-28T14:00:00+07:00",
+            eventEndDate: "2026-11-28T22:00:00+07:00",
+            dateDisplay: "Sabtu, 28 November 2026",
+            timeDisplay: "14.00 WIB — Selesai",
+            location: "Dijemput Prince Gery",
+            notes: "Siapkan senyum terbaikmu ya, nanti kita rayakan berdua ✨",
+
+            // Nomor WhatsApp untuk tombol RSVP
+            whatsappNumber: "6285224492559",
+            whatsappMessage: "Hai Gery, cintaku, sayangku!! Aku sudah buka undangannya dan siap dijemput untuk hari spesialku 💕",
+
+            // ======================================================================
+            // [INPUT FOTO UTAMA - TOTAL 18 SLOT (INDEKS 0 s/d 17)]
+            // Isi `src` dengan path lokal (mis. "assets/foto1.jpg") atau URL HTTPS.
+            // Jika `src` dikosongkan "", bingkai placeholder vintage otomatis tampil.
+            // ======================================================================
+            photos: [
+                // --- SECTION 2: HAPPY BIRTHDAY (1 Foto Utama) ---
+                { src: "1.jpeg", caption: "Ciwas's dayyyy' ✨" },       // [0] Foto Hero Polaroid
+
+                // --- SECTION 3: ONE OF MY FAVORITE MOMENTS (5 Foto Kolase) ---
+                { src: "momen1.jpeg", caption: "Momen #1" },                 // [1] Kolase 1
+                { src: "momen2.jpeg", caption: "Momen #2" },                 // [2] Kolase 2
+                { src: "momen3.jpeg", caption: "Momen #3" },                 // [3] Kolase 3
+                { src: "momen4.jpeg", caption: "Momen #4" },                 // [4] Kolase 4
+                { src: "momen5.jpeg", caption: "Momen #5" },                 // [5] Kolase 5
+
+                // --- SECTION 5: REASONS I LOVE YOU (4 Foto Avatar Bulat) ---
+                { src: "reason1.jpeg", caption: "Reason #1" },                // [6] Alasan ke-1
+                { src: "reason2.jpeg", caption: "Reason #2" },                // [7] Alasan ke-2
+                { src: "reason3.jpeg", caption: "Reason #3" },                // [8] Alasan ke-3
+                { src: "reason4.jpeg", caption: "Reason #4" },                // [9] Alasan ke-4
+
+                // --- SECTION 6: THREE WORDS (3 Foto Kartu Kata) ---
+                { src: "kata1.jpeg", caption: "Hangat" },                   // [10] Kata ke-1
+                { src: "kata2.jpeg", caption: "Berarti" },                  // [11] Kata ke-2
+                { src: "kata3.jpeg", caption: "Rumah" },                    // [12] Kata ke-3
+
+                // --- SECTION 7: A LETTER FOR YOU (3 Foto Strip Fotobooth) ---
+                { src: "s1.jpeg", caption: "Strip 1" },                  // [13] Fotobooth 1
+                { src: "s2.jpeg", caption: "Strip 2" },                  // [14] Fotobooth 2
+                { src: "s3.jpeg", caption: "Strip 3" },                  // [15] Fotobooth 3
+
+                // --- SECTION 8: THE LITTLE THINGS YOU DO (2 Foto Mini Polaroid) ---
+                { src: "l1.jpeg", caption: "Little thing 1" },           // [16] Mini Polaroid 1
+                { src: "l2.jpeg", caption: "Little thing 2" }            // [17] Mini Polaroid 2
+            ],
+
+            // ======================================================================
+            // [INPUT GAMBAR HIRONO COUPLE - TOTAL 7 SLOT (INDEKS 0 s/d 6)]
+            // Isi `src` dengan path PNG transparan/foto figurine Hirono couple kamu.
+            // Jika kosong "", otomatis tampil stiker ilustrasi Hirono Couple bawaan!
+            // ======================================================================
+            hironoCouples: [
+                { src: "hirono1.png", label: "Us ♥" },                       // [0] Section 1: Cover Amplop
+                { src: "hirono2.png", label: "Birthday Girl & Him" },        // [1] Section 2: Happy Birthday
+                { src: "hirono3.png", label: "Always Together" },            // [2] Section 3: Favorite Moments
+                { src: "h4.png", label: "Our Song" },                   // [3] Section 4: Song Vinyl
+                { src: "h5.png", label: "My Favorite Duo" },            // [4] Section 6: Three Words
+                { src: "h6.png", label: "Little Moments" },             // [5] Section 8: Little Things
+                { src: "h4.png", label: "See You Soon ♥" }              // [6] Section 9: You're Invited
+            ],
+
+            // ======================================================================
+            // [INPUT LAGU / AUDIO]
+            // - ambientSrc: backsound tenang saat web pertama kali dibuka
+            // - audioSrc: file MP3 lokal/URL langsung (jika diisi, diprioritaskan)
+            // - youtubeId: ID video YouTube untuk pemutar otomatis (Hanya Untukmu)
+            // ======================================================================
+            song: {
+                title: "Hanya Untukmu",
+                artist: "Special Dedication for Nasywa",
+                note: "Setiap kali lagu ini diputar, pikiranku langsung tertuju padamu.",
+                ambientSrc: "", // Contoh: "assets/backsound-tenang.mp3"
+                audioSrc: "", // Opsional: isi path MP3 lokal jika punya file MP3-nya
+                youtubeId: "xReT7IrqOGk",
+                youtubeUrl: "https://www.youtube.com/watch?v=xReT7IrqOGk"
+            },
+
+            // Section 5: Reasons I Love You
+            reasons: [
+                "Cara kamu tertawa sampai matamu ikut menyipit.",
+                "Ketulusan dan perhatian kecilmu di hari-hari biasa.",
+                "Rasa nyaman yang selalu muncul saat berada di dekatmu.",
+                "Semangat dan kelembutan hatimu."
+            ],
+
+            // Section 6: Three Words
+            threeWords: [
+                "Hangat",
+                "Berarti",
+                "Rumah"
+            ],
+
+            // Section 7: Letter
+            letter:
+                "Selamat ulang tahun, cywaaaa. 💗\n\n" +
+                "Di hari bertambahnya usiamu ini, aku cuma ingin kamu tahu betapa berartinya kehadiranmu untukku. " +
+                "Terima kasih sudah menjadi bagian paling indah dari cerita hariku.\n\n" +
+                "Semoga tahun ini membawa banyak tawa, kesehatan, dan semua hal baik yang selama ini kamu doakan. " +
+                "Aku akan selalu ada untukmu dan merayakan langkah-langkahmu. <33"
+            ,
+
+            // Section 8: The Little Things You Do That Make Me Smile
+            littleThings: [
+                "Cara kamu bercerita tentang hal-hal yang kamu suka.",
+                "Lebarnya senyummu yang selalu membuatku bahagia",
+                "Kebiasaan kecilmu yang kelihatan sederhana tapi lumcu.",
+                "Tatapan hangatmu yang selalu menenangkan."
+            ]
+        };
+
+        /* ========================================================================
+           GLOBAL IMAGE FALLBACK LISTENER (SNIPPET D1 - CAPTURE PHASE)
+           ======================================================================== */
+        document.addEventListener(
+            "error",
+            (e) => {
+                const img = e.target;
+                if (!img || img.tagName !== "IMG" || !img.dataset.fallback) return;
+                const ph = document.createElement("div");
+                ph.className = "photo-placeholder";
+                ph.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M8 5l1.5-2h5L16 5"/>
+          </svg>
+          <span></span>
+        `;
+                ph.querySelector("span").textContent = img.dataset.fallback;
+                img.replaceWith(ph);
+            },
+            true
+        );
+
+        /* ========================================================================
+           HELPER: RENDER FOTO ATAU PLACEHOLDER FALLBACK
+           ======================================================================== */
+        function createPhotoElement(index, altText, captionText = "") {
+            const photoItem = CONFIG.photos[index];
+            const hasSrc =
+                photoItem && typeof photoItem === "object"
+                    ? Boolean(photoItem.src && photoItem.src.trim())
+                    : Boolean(typeof photoItem === "string" && photoItem.trim());
+
+            const src = hasSrc
+                ? typeof photoItem === "string"
+                    ? photoItem.trim()
+                    : photoItem.src.trim()
+                : "";
+            const resolvedCaption =
+                typeof photoItem === "object" && photoItem.caption
+                    ? photoItem.caption
+                    : captionText;
+
+            const safeFallback = (resolvedCaption || `Bingkai Foto #${index + 1}`).replace(/"/g, "&quot;");
+
+            const placeholderHTML = `
+        <div class="photo-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M8 5l1.5-2h5L16 5"/>
+          </svg>
+          <span>${safeFallback}</span>
+        </div>
+      `;
+
+            if (!hasSrc) {
+                return {
+                    html: placeholderHTML,
+                    src: "",
+                    caption: resolvedCaption || "Kenangan Spesial"
+                };
+            }
+
+            const safeAlt = (altText || safeFallback).replace(/"/g, "&quot;");
+            const html = `<img src="${src}" alt="${safeAlt}" data-fallback="${safeFallback}" loading="lazy" />`;
+
+            return { html, src, caption: resolvedCaption || altText };
+        }
+
+        /* ========================================================================
+           HELPER: RENDER 7 STIKER HIRONO COUPLE
+           ======================================================================== */
+        function renderHironoCouples() {
+            const defaultCoupleSVG = `
+        <svg width="104" height="78" viewBox="0 0 110 82" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Hirono Kiri (Boy) -->
+          <circle cx="36" cy="30" r="16" fill="#F2D3C2" stroke="#68131E" stroke-width="1.6"/>
+          <path d="M20 28C20 17 27 11 36 11C45 11 52 17 52 28C49 23 44 22 40 24C37 20 32 21 29 24C25 22 22 24 20 28Z" fill="#6E3B2E" stroke="#4A251B" stroke-width="1.4"/>
+          <path d="M28 31H33M39 31H44" stroke="#4A251B" stroke-width="1.6" stroke-linecap="round"/>
+          <circle cx="27" cy="35" r="2.2" fill="#E89A9E" opacity="0.7"/>
+          <circle cx="45" cy="35" r="2.2" fill="#E89A9E" opacity="0.7"/>
+          <rect x="26" y="46" width="20" height="22" rx="6" fill="#7D8C75" stroke="#4A251B" stroke-width="1.5"/>
+
+          <!-- Hirono Kanan (Girl) -->
+          <circle cx="74" cy="31" r="15.5" fill="#F6D9C9" stroke="#68131E" stroke-width="1.6"/>
+          <path d="M58 30C58 18 65 12 74 12C83 12 90 18 90 30C87 25 82 23 78 25C75 21 70 22 67 25C63 23 60 25 58 30Z" fill="#8C4A3B" stroke="#4A251B" stroke-width="1.4"/>
+          <polygon points="74,4 69,14 79,14" fill="#EAB8BC" stroke="#821B28" stroke-width="1.2"/>
+          <path d="M66 32H71M77 32H82" stroke="#4A251B" stroke-width="1.6" stroke-linecap="round"/>
+          <circle cx="65" cy="36" r="2.2" fill="#E89A9E" opacity="0.75"/>
+          <circle cx="83" cy="36" r="2.2" fill="#E89A9E" opacity="0.75"/>
+          <path d="M64 47H84L87 68H61L64 47Z" fill="#EAB8BC" stroke="#821B28" stroke-width="1.5" stroke-linejoin="round"/>
+
+          <!-- Gandengan Tangan & Hati Kecil Tengah -->
+          <path d="M46 56Q55 60 64 56" stroke="#4A251B" stroke-width="2" stroke-linecap="round"/>
+          <path d="M55 17C53.6 15 50.5 15.3 49.8 17.6C49 20 55 23.5 55 23.5C55 23.5 61 20 60.2 17.6C59.5 15.3 56.4 15 55 17Z" fill="#C83E4D"/>
+        </svg>
+      `;
+
+            for (let i = 0; i < 7; i++) {
+                const slot = document.getElementById(`hironoSlot${i}`);
+                if (!slot) continue;
+                const item = (CONFIG.hironoCouples && CONFIG.hironoCouples[i]) || {};
+                const src = (item.src || "").trim();
+                const label = (item.label || "Us ♥").trim();
+
+                const mediaHtml = src
+                    ? `<img src="${src}" alt="Hirono Couple ${i + 1}" data-fallback="${label.replace(/"/g, "&quot;")}" loading="lazy" />`
+                    : defaultCoupleSVG;
+
+                slot.innerHTML = `
+          <div class="hirono-couple-card">
+            ${mediaHtml}
+            <span class="hirono-couple-tag">${label}</span>
+          </div>
+        `;
+            }
+        }
+
+        /* ========================================================================
+           POPULATE CONTENT FROM CONFIG
+           ======================================================================== */
+        let lightboxGallery = [];
+
+        function populateContent() {
+            document.title = `Happy Birthday — ${CONFIG.recipientName}`;
+            document.getElementById("envRecipientName").textContent = CONFIG.recipientName;
+
+            // Split "Happy Birthday" menjadi span per huruf untuk animasi stagger
+            const heroMainEl = document.getElementById("heroMainScript");
+            const heroText = "Happy Birthday";
+            heroMainEl.innerHTML = Array.from(heroText)
+                .map((ch, idx) =>
+                    ch === " "
+                        ? `<span class="hero-char" style="--char-i:${idx};">&nbsp;</span>`
+                        : `<span class="hero-char" style="--char-i:${idx};">${ch}</span>`
+                )
+                .join("");
+
+            document.getElementById("heroRecipientName").textContent = CONFIG.recipientName;
+            document.getElementById("heroDateBadge").textContent = `🗓️ ${CONFIG.dateDisplay} • WIB`;
+
+            // Hero photo (index 0)
+            const heroData = createPhotoElement(0, `Foto ulang tahun ${CONFIG.recipientName}`, "Our special day ✨");
+            document.getElementById("heroPhotoBox").innerHTML = heroData.html;
+            document.getElementById("heroCaption").textContent = heroData.caption;
+
+            // Moments collage (5 items, index 1..5)
+            const momentsGrid = document.getElementById("momentsGrid");
+            const momentCaptions = ["Momen #1", "Momen #2", "Momen #3", "Momen #4", "Momen #5"];
+            const tapes = ["top-left", "top-right", "top-center", "top-left", "top-center"];
+            lightboxGallery = [];
+
+            for (let i = 0; i < 5; i++) {
+                const photoIdx = i + 1;
+                const mData = createPhotoElement(photoIdx, `Momen favorit ${i + 1}`, momentCaptions[i]);
+                lightboxGallery.push(mData);
+
+                const card = document.createElement("div");
+                card.className = "polaroid collage-item reveal";
+                card.dataset.anim = i % 2 ? "right" : "left";
+                card.style.setProperty("--i", i);
+                card.innerHTML = `
+          <div class="tape ${tapes[i]}"></div>
+          <div class="polaroid-frame">${mData.html}</div>
+          <div class="polaroid-caption">${mData.caption}</div>
+        `;
+                card.addEventListener("click", () => {
+                    openLightbox(i);
+                });
+                momentsGrid.appendChild(card);
+            }
+
+            // Reasons 2x2 (index 6..9)
+            const reasonsGrid = document.getElementById("reasonsGrid");
+            CONFIG.reasons.slice(0, 4).forEach((reason, idx) => {
+                const rData = createPhotoElement(6 + idx, `Alasan ${idx + 1}`, `Reason #${idx + 1}`);
+                const card = document.createElement("div");
+                card.className = "reason-card paper-surface reveal";
+                card.style.setProperty("--i", idx);
+                card.innerHTML = `
+          <div class="reason-avatar">${rData.html}</div>
+          <span class="reason-num" data-target="${idx + 1}">0${idx + 1}</span>
+          <p class="reason-text">${reason}</p>
+        `;
+                reasonsGrid.appendChild(card);
+            });
+
+            // Three Words (index 10..12)
+            const threeWordsGrid = document.getElementById("threeWordsGrid");
+            CONFIG.threeWords.slice(0, 3).forEach((word, idx) => {
+                const wData = createPhotoElement(10 + idx, `Kata ${word}`, word);
+                const card = document.createElement("div");
+                card.className = "polaroid word-card reveal";
+                card.style.setProperty("--i", idx);
+                card.innerHTML = `
+          <div class="tape top-center"></div>
+          <div class="polaroid-frame">${wData.html}</div>
+          <div class="word-label">${word}</div>
+        `;
+                threeWordsGrid.appendChild(card);
+            });
+
+            // Letter salutation, ghost height lock & Photobooth strip (index 13..15)
+            const firstName = CONFIG.recipientName.split(" ")[0] || CONFIG.recipientName;
+            document.getElementById("letterSalutation").textContent = `Untuk ${firstName},`;
+            document.getElementById("letterGhost").textContent = CONFIG.letter || "";
+
+            ["pbSlot1", "pbSlot2", "pbSlot3"].forEach((slotId, idx) => {
+                const pbData = createPhotoElement(13 + idx, `Fotobooth ${idx + 1}`, `Strip ${idx + 1}`);
+                document.getElementById(slotId).innerHTML = pbData.html;
+            });
+
+            // Little Things list & 2 mini polaroids (index 16..17)
+            const listEl = document.getElementById("littleThingsList");
+            CONFIG.littleThings.forEach((item, idx) => {
+                const li = document.createElement("li");
+                li.className = "reveal";
+                li.style.setProperty("--i", idx);
+                li.innerHTML = `
+          <span class="star-icon" aria-hidden="true">✦</span>
+          <span>${item}</span>
+        `;
+                listEl.appendChild(li);
+            });
+
+            const miniRow = document.getElementById("littleThingsPhotos");
+            [0, 1].forEach((offset) => {
+                const ltData = createPhotoElement(16 + offset, `Hal kecil manis ${offset + 1}`, `Little thing ${offset + 1}`);
+                const pol = document.createElement("div");
+                pol.className = "polaroid";
+                pol.innerHTML = `
+          <div class="tape top-center"></div>
+          <div class="polaroid-frame">${ltData.html}</div>
+          <div class="polaroid-caption">${ltData.caption}</div>
+        `;
+                miniRow.appendChild(pol);
+            });
+
+            // Invitation details
+            document.getElementById("inviteName").textContent = CONFIG.recipientName;
+            document.getElementById("inviteDateText").textContent = CONFIG.dateDisplay;
+            document.getElementById("inviteTimeText").textContent = CONFIG.timeDisplay;
+            document.getElementById("inviteLocationText").textContent = CONFIG.location;
+
+            const dressRow = document.getElementById("inviteDressRow");
+            if (CONFIG.notes && CONFIG.notes.trim()) {
+                document.getElementById("inviteNotesText").textContent = CONFIG.notes;
+            } else {
+                dressRow.style.display = "none";
+            }
+
+            // RSVP WhatsApp link
+            const waText = encodeURIComponent(
+                CONFIG.whatsappMessage || `Hai! Aku mau konfirmasi kehadiran untuk ulang tahun ${CONFIG.recipientName} 💕`
+            );
+            const waNum = (CONFIG.whatsappNumber || "").replace(/\D/g, "");
+            document.getElementById("rsvpBtn").href = waNum
+                ? `https://wa.me/${waNum}?text=${waText}`
+                : `https://wa.me/?text=${waText}`;
+
+            renderHironoCouples();
+        }
+
+        /* ========================================================================
+           HELPER: LIGHT CONFETTI BURST
+           ======================================================================== */
+        function triggerConfetti(containerId, count = 26) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+            const colors = ["#EAB8BC", "#C9A24D", "#821B28", "#FCF7F0", "#E5C982"];
+            for (let i = 0; i < count; i++) {
+                const piece = document.createElement("span");
+                piece.className = "confetti-piece";
+                piece.style.left = `${Math.random() * 100}%`;
+                piece.style.backgroundColor = colors[i % colors.length];
+                piece.style.setProperty("--dur", `${2.2 + Math.random() * 1.4}s`);
+                piece.style.animationDelay = `${Math.random() * 0.4}s`;
+                container.appendChild(piece);
+                setTimeout(() => piece.remove(), 4000);
+            }
+        }
+
+        /* ========================================================================
+           1. INIT ENVELOPE (SIGNATURE OPEN, HEART BURST, UNLOCK SCROLL)
+           ======================================================================== */
+        function initEnvelope(onFirstInteract) {
+            const envSection = document.getElementById("sec-envelope");
+            const stage = document.getElementById("envelopeStage");
+            const btn = document.getElementById("openEnvelopeBtn");
+            const nextSec = document.getElementById("sec-birthday");
+            let opened = false;
+
+            function spawnSealHearts() {
+                const hearts = ["♥", "💕", "✨", "♥", "💖"];
+                hearts.forEach((symbol, i) => {
+                    const el = document.createElement("span");
+                    el.className = "seal-burst-heart";
+                    el.textContent = symbol;
+                    const angle = (-150 + i * 38) * (Math.PI / 180);
+                    const dist = 55 + Math.random() * 35;
+                    el.style.setProperty("--tx", `${Math.cos(angle) * dist}px`);
+                    el.style.setProperty("--ty", `${Math.sin(angle) * dist - 20}px`);
+                    el.style.setProperty("--rot", `${-25 + Math.random() * 50}deg`);
+                    stage.appendChild(el);
+                    setTimeout(() => el.remove(), 950);
+                });
+            }
+
+            function handleOpen() {
+                if (typeof onFirstInteract === "function") {
+                    onFirstInteract();
+                }
+
+                if (opened) {
+                    document.documentElement.classList.remove("scroll-locked");
+                    nextSec.scrollIntoView({ behavior: "smooth" });
+                    return;
+                }
+
+                opened = true;
+                if (navigator.vibrate) {
+                    try {
+                        navigator.vibrate(30);
+                    } catch (_) { }
+                }
+
+                stage.classList.add("is-open");
+                spawnSealHearts();
+
+                setTimeout(() => {
+                    envSection.classList.add("is-zooming-out");
+                    document.documentElement.classList.remove("scroll-locked");
+                }, 650);
+
+                setTimeout(() => {
+                    nextSec.scrollIntoView({ behavior: "smooth" });
+                    triggerConfetti("heroConfetti", 28);
+                    setTimeout(() => {
+                        envSection.classList.remove("is-zooming-out");
+                    }, 600);
+                }, 1050);
+            }
+
+            btn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                handleOpen();
+            });
+        }
+
+        /* ========================================================================
+           2. INIT REVEAL (INTERSECTION OBSERVER + STAGGER + COUNT-UP)
+           ======================================================================== */
+        function initReveal() {
+            const items = document.querySelectorAll(".reveal, .photobooth-strip, .letter-paper");
+            const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            if (prefersReduced || !("IntersectionObserver" in window)) {
+                items.forEach((el) => el.classList.add("is-visible"));
+                return;
+            }
+
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("is-visible");
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.14 }
+            );
+
+            items.forEach((el) => observer.observe(el));
+        }
+
+        /* ========================================================================
+           3. INIT TYPEWRITER (LOCKED HEIGHT + CURSOR HIDES ON FINISH)
+           ======================================================================== */
+        function initTypewriter() {
+            const paper = document.getElementById("letterPaper");
+            const target = document.getElementById("letterTypewriter");
+            const text = CONFIG.letter || "";
+            const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            if (prefersReduced) {
+                target.textContent = text;
+                return;
+            }
+
+            let started = false;
+            let idx = 0;
+
+            const cursor = document.createElement("span");
+            cursor.className = "type-cursor";
+            cursor.setAttribute("aria-hidden", "true");
+
+            function typeStep() {
+                if (idx < text.length) {
+                    const charNode = document.createTextNode(text.charAt(idx));
+                    target.insertBefore(charNode, cursor);
+                    idx++;
+                    const delay = text.charAt(idx - 1) === "\n" ? 210 : 32;
+                    setTimeout(typeStep, delay);
+                } else {
+                    setTimeout(() => cursor.classList.add("is-done"), 900);
+                }
+            }
+
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting && !started) {
+                            started = true;
+                            target.appendChild(cursor);
+                            setTimeout(typeStep, 350);
+                            observer.unobserve(paper);
+                        }
+                    });
+                },
+                { threshold: 0.25 }
+            );
+
+            observer.observe(paper);
+        }
+
+        /* ========================================================================
+           4. INIT COUNTDOWN (DIGIT ROLL + CLEARINTERVAL ON FINISH)
+           ======================================================================== */
+        function initCountdown() {
+            const gridEl = document.getElementById("countdownGrid");
+            const doneEl = document.getElementById("countdownDone");
+            const daysEl = document.getElementById("cdDays");
+            const hoursEl = document.getElementById("cdHours");
+            const minsEl = document.getElementById("cdMinutes");
+            const secsEl = document.getElementById("cdSeconds");
+
+            const targetTime = new Date(CONFIG.eventDate).getTime();
+            let timerId = null;
+
+            function setDigitWithRoll(el, nextVal) {
+                if (el.textContent !== nextVal) {
+                    el.textContent = nextVal;
+                    el.classList.remove("is-rolling");
+                    void el.offsetWidth;
+                    el.classList.add("is-rolling");
+                }
+            }
+
+            function updateTimer() {
+                const now = Date.now();
+                const diff = targetTime - now;
+
+                if (Number.isNaN(targetTime) || diff <= 0) {
+                    gridEl.style.display = "none";
+                    doneEl.style.display = "block";
+                    triggerConfetti("inviteConfetti", 32);
+                    if (timerId) clearInterval(timerId);
+                    return;
+                }
+
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((diff / (1000 * 60)) % 60);
+                const seconds = Math.floor((diff / 1000) % 60);
+
+                setDigitWithRoll(daysEl, String(days).padStart(2, "0"));
+                setDigitWithRoll(hoursEl, String(hours).padStart(2, "0"));
+                setDigitWithRoll(minsEl, String(minutes).padStart(2, "0"));
+                setDigitWithRoll(secsEl, String(seconds).padStart(2, "0"));
+            }
+
+            updateTimer();
+            timerId = setInterval(updateTimer, 1000);
+        }
+
+        /* ========================================================================
+           5. INIT LIGHTBOX (SWIPE LEFT/RIGHT + FOCUS MANAGEMENT)
+           ======================================================================== */
+        let lightboxModal, lightboxImg, lightboxCaption;
+        let currentLightboxIdx = 0;
+        let lastFocusedElement = null;
+
+        function renderLightboxSlide(index) {
+            const validSlides = lightboxGallery
+                .map((item, idx) => ({ ...item, originalIdx: idx }))
+                .filter((item) => Boolean(item.src));
+
+            if (!validSlides.length) return false;
+
+            const normalized = ((index % validSlides.length) + validSlides.length) % validSlides.length;
+            currentLightboxIdx = normalized;
+            const slide = validSlides[normalized];
+
+            lightboxImg.src = slide.src;
+            lightboxImg.alt = slide.caption;
+            lightboxCaption.textContent = `${slide.caption} (${normalized + 1}/${validSlides.length})`;
+            return true;
+        }
+
+        function openLightbox(momentIdx) {
+            const validSlides = lightboxGallery.filter((item) => Boolean(item.src));
+            if (!validSlides.length) return;
+
+            const clickedItem = lightboxGallery[momentIdx];
+            const startIdx = clickedItem && clickedItem.src
+                ? validSlides.findIndex((s) => s.src === clickedItem.src)
+                : 0;
+
+            if (!renderLightboxSlide(startIdx >= 0 ? startIdx : 0)) return;
+
+            lastFocusedElement = document.activeElement;
+            lightboxModal.classList.add("is-visible");
+            document.getElementById("lightboxClose").focus();
+        }
+
+        function initLightbox() {
+            lightboxModal = document.getElementById("lightboxModal");
+            lightboxImg = document.getElementById("lightboxImg");
+            lightboxCaption = document.getElementById("lightboxCaption");
+            const closeBtn = document.getElementById("lightboxClose");
+            const prevBtn = document.getElementById("lightboxPrev");
+            const nextBtn = document.getElementById("lightboxNext");
+
+            function close() {
+                lightboxModal.classList.remove("is-visible");
+                lightboxImg.src = "";
+                if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+                    lastFocusedElement.focus();
+                }
+            }
+
+            closeBtn.addEventListener("click", close);
+            prevBtn.addEventListener("click", () => renderLightboxSlide(currentLightboxIdx - 1));
+            nextBtn.addEventListener("click", () => renderLightboxSlide(currentLightboxIdx + 1));
+
+            lightboxModal.addEventListener("click", (e) => {
+                if (e.target === lightboxModal) close();
+            });
+
+            document.addEventListener("keydown", (e) => {
+                if (!lightboxModal.classList.contains("is-visible")) return;
+                if (e.key === "Escape") close();
+                if (e.key === "ArrowLeft") renderLightboxSlide(currentLightboxIdx - 1);
+                if (e.key === "ArrowRight") renderLightboxSlide(currentLightboxIdx + 1);
+            });
+
+            // Touch swipe kiri/kanan pada lightbox
+            let touchStartX = 0;
+            lightboxModal.addEventListener(
+                "touchstart",
+                (e) => {
+                    touchStartX = e.changedTouches[0].clientX;
+                },
+                { passive: true }
+            );
+            lightboxModal.addEventListener(
+                "touchend",
+                (e) => {
+                    const deltaX = e.changedTouches[0].clientX - touchStartX;
+                    if (Math.abs(deltaX) > 45) {
+                        renderLightboxSlide(deltaX > 0 ? currentLightboxIdx - 1 : currentLightboxIdx + 1);
+                    }
+                },
+                { passive: true }
+            );
+        }
+
+        /* ========================================================================
+           6. INIT MUSIC (WEB ANIMATIONS API SMOOTH ACCELERATION + TONEARM + YT)
+           ======================================================================== */
+        function initMusic() {
+            const songSection = document.getElementById("sec-song");
+            const vinylStage = document.getElementById("vinylStage");
+            const titleEl = document.getElementById("songTitle");
+            const artistEl = document.getElementById("songArtist");
+            const noteEl = document.getElementById("songNote");
+            const audioEl = document.getElementById("bgAudio");
+            const btnEl = document.getElementById("toggleAudioBtn");
+            const iconEl = document.getElementById("audioIcon");
+            const labelEl = document.getElementById("audioLabel");
+            const discEl = document.getElementById("vinylDisc");
+            const statusBadgeEl = document.getElementById("audioStatusBadge");
+            const statusTextEl = document.getElementById("audioStatusText");
+
+            titleEl.textContent = CONFIG.song.title || "Hanya Untukmu";
+            artistEl.textContent = CONFIG.song.artist || "";
+            noteEl.textContent = CONFIG.song.note || "";
+
+            const ambientSrc = (CONFIG.song.ambientSrc || "").trim();
+            const mainSrc = (CONFIG.song.audioSrc || "").trim();
+            const youtubeId = (CONFIG.song.youtubeId || "").trim();
+            const hasMainMusic = Boolean(mainSrc || youtubeId);
+
+            // Hidden YouTube iframe container untuk memutar audio dari YouTube ID
+            let ytIframe = null;
+            let isYtPlaying = false;
+            if (!mainSrc && youtubeId) {
+                const ytHolder = document.createElement("div");
+                ytHolder.style.cssText = "position:fixed;width:1px;height:1px;opacity:0;pointer-events:none;left:-9999px;top:-9999px;";
+                ytIframe = document.createElement("iframe");
+                ytIframe.width = "1";
+                ytIframe.height = "1";
+                ytIframe.allow = "autoplay; encrypted-media";
+                ytIframe.setAttribute("title", CONFIG.song.title || "YouTube Audio");
+                ytHolder.appendChild(ytIframe);
+                document.body.appendChild(ytHolder);
+            }
+
+            let activeTrack = ambientSrc ? "ambient" : (hasMainMusic ? "main" : "none");
+            let pendingAutoplayMode = null;
+            let hasSwitchedToMainOnEnter = false;
+
+            // Web Animations API untuk akselerasi/deselerasi putaran piringan vinyl halus
+            let spinAnim = null;
+            const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            if (!prefersReduced && typeof discEl.animate === "function") {
+                spinAnim = discEl.animate(
+                    [{ rotate: "0deg" }, { rotate: "360deg" }],
+                    { duration: 7500, iterations: Infinity }
+                );
+                spinAnim.playbackRate = 0;
+            }
+
+            function rampVinylSpeed(targetRate) {
+                if (!spinAnim) return;
+                const startRate = spinAnim.playbackRate;
+                const startTime = performance.now();
+                const duration = 600;
+
+                function step(now) {
+                    const t = Math.min(1, (now - startTime) / duration);
+                    spinAnim.playbackRate = startRate + (targetRate - startRate) * t;
+                    if (t < 1) requestAnimationFrame(step);
+                }
+                requestAnimationFrame(step);
+            }
+
+            function setStatus(text, isBlocked = false) {
+                statusTextEl.textContent = text;
+                statusBadgeEl.classList.toggle("is-blocked", isBlocked);
+            }
+
+            function setPlayingState(isPlaying) {
+                vinylStage.classList.toggle("is-playing", isPlaying);
+                btnEl.setAttribute("aria-pressed", String(isPlaying));
+                iconEl.textContent = isPlaying ? "❚❚" : "▶";
+                labelEl.textContent = isPlaying ? "Pause Song" : "Play Song";
+                rampVinylSpeed(isPlaying ? 1 : 0);
+            }
+
+            function playYouTubeMain() {
+                if (!ytIframe || !youtubeId) return false;
+                activeTrack = "main";
+                isYtPlaying = true;
+                ytIframe.src = `https://www.youtube.com/embed/${encodeURIComponent(youtubeId)}?autoplay=1&loop=1&playlist=${encodeURIComponent(youtubeId)}&enablejsapi=1`;
+                setPlayingState(true);
+                setStatus(`Memutar "${CONFIG.song.title}" ♪`);
+                return true;
+            }
+
+            function pauseYouTubeMain() {
+                if (!ytIframe) return;
+                isYtPlaying = false;
+                ytIframe.src = "";
+                setPlayingState(false);
+                setStatus(`"${CONFIG.song.title}" dijeda`);
+            }
+
+            function loadTrack(mode) {
+                if (mode === "main" && mainSrc) {
+                    activeTrack = "main";
+                    audioEl.loop = false;
+                    audioEl.volume = 0.85;
+                    if (audioEl.getAttribute("data-src") !== mainSrc) {
+                        audioEl.src = mainSrc;
+                        audioEl.setAttribute("data-src", mainSrc);
+                    }
+                    return true;
+                }
+                if (mode === "ambient" && ambientSrc) {
+                    activeTrack = "ambient";
+                    audioEl.loop = true;
+                    audioEl.volume = 0.25;
+                    if (audioEl.getAttribute("data-src") !== ambientSrc) {
+                        audioEl.src = ambientSrc;
+                        audioEl.setAttribute("data-src", ambientSrc);
+                    }
+                    return true;
+                }
+                return false;
+            }
+
+            async function attemptPlay(mode, { fromAutoplay = false } = {}) {
+                if (mode === "main" && !mainSrc && youtubeId) {
+                    return playYouTubeMain();
+                }
+                if (!loadTrack(mode)) return false;
+
+                try {
+                    await audioEl.play();
+                    pendingAutoplayMode = null;
+                    setPlayingState(true);
+                    if (mode === "ambient") {
+                        setStatus("Konfirmasi: Backsound tenang aktif");
+                    } else {
+                        setStatus(`Memutar "${CONFIG.song.title}" ♪`);
+                    }
+                    return true;
+                } catch (err) {
+                    setPlayingState(false);
+                    if (fromAutoplay && mode === "ambient") {
+                        pendingAutoplayMode = "ambient";
+                        setStatus("Auto-play diblokir browser — sentuh amplop atau Play", true);
+                    } else if (mode === "main") {
+                        setStatus(`Siap diputar — tekan Play Song untuk "${CONFIG.song.title}"`, true);
+                    } else {
+                        setStatus("Tekan Play untuk memutar musik", true);
+                    }
+                    return false;
+                }
+            }
+
+            if (!ambientSrc && !hasMainMusic) {
+                btnEl.style.display = "none";
+                setStatus("Belum ada file audio di CONFIG.song");
+                return;
+            }
+
+            if (ambientSrc) {
+                attemptPlay("ambient", { fromAutoplay: true });
+            } else if (hasMainMusic) {
+                if (mainSrc) loadTrack("main");
+                setStatus(`Siap memutar "${CONFIG.song.title}"`);
+            }
+
+            function unlockPendingAmbient() {
+                if (pendingAutoplayMode === "ambient" && activeTrack === "ambient" && audioEl.paused) {
+                    attemptPlay("ambient", { fromAutoplay: false });
+                }
+            }
+
+            if (hasMainMusic && songSection && "IntersectionObserver" in window) {
+                const songObserver = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach(async (entry) => {
+                            if (entry.isIntersecting && !hasSwitchedToMainOnEnter) {
+                                hasSwitchedToMainOnEnter = true;
+                                const wasAmbientPlaying = activeTrack === "ambient" && !audioEl.paused;
+                                if (!audioEl.paused) audioEl.pause();
+                                const played = await attemptPlay("main", { fromAutoplay: !wasAmbientPlaying });
+                                if (!played) {
+                                    setStatus("Masuk section musik — tekan Play Song", true);
+                                }
+                            }
+                        });
+                    },
+                    { threshold: 0.35 }
+                );
+                songObserver.observe(songSection);
+            }
+
+            btnEl.addEventListener("click", async () => {
+                if (!mainSrc && youtubeId) {
+                    if (!audioEl.paused) audioEl.pause();
+                    if (isYtPlaying) {
+                        pauseYouTubeMain();
+                    } else {
+                        playYouTubeMain();
+                    }
+                    return;
+                }
+
+                const targetMode = mainSrc ? "main" : "ambient";
+                if (audioEl.paused || activeTrack !== targetMode) {
+                    if (activeTrack !== targetMode && !audioEl.paused) audioEl.pause();
+                    await attemptPlay(targetMode, { fromAutoplay: false });
+                } else {
+                    audioEl.pause();
+                    setPlayingState(false);
+                    setStatus(activeTrack === "main" ? `"${CONFIG.song.title}" dijeda` : "Backsound dijeda");
+                }
+            });
+
+            audioEl.addEventListener("ended", () => {
+                if (activeTrack === "main" && ambientSrc) {
+                    attemptPlay("ambient", { fromAutoplay: false });
+                } else {
+                    setPlayingState(false);
+                    setStatus("Pemutaran selesai");
+                }
+            });
+
+            audioEl.addEventListener("pause", () => {
+                if (!isYtPlaying) setPlayingState(false);
+            });
+            audioEl.addEventListener("play", () => setPlayingState(true));
+
+            return { unlockPendingAmbient };
+        }
+
+        /* ========================================================================
+           7. INIT NAVIGATION PROGRESS BAR & SIDE DOTS (C)
+           ======================================================================== */
+        function initNavigationUI() {
+            const sections = Array.from(document.querySelectorAll("main > section"));
+            const dotsContainer = document.getElementById("sideDots");
+            const progressBar = document.getElementById("scrollProgressBar");
+
+            sections.forEach((sec, idx) => {
+                const dot = document.createElement("button");
+                dot.type = "button";
+                dot.className = "side-dot" + (idx === 0 ? " is-active" : "");
+                dot.setAttribute("aria-label", `Ke halaman ${idx + 1}: ${sec.getAttribute("aria-label") || ""}`);
+                dot.addEventListener("click", () => {
+                    document.documentElement.classList.remove("scroll-locked");
+                    sec.scrollIntoView({ behavior: "smooth" });
+                });
+                dotsContainer.appendChild(dot);
+            });
+
+            const dots = Array.from(dotsContainer.querySelectorAll(".side-dot"));
+
+            function updateScrollProgress() {
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const pct = docHeight > 0 ? Math.min(100, Math.max(0, (window.scrollY / docHeight) * 100)) : 0;
+                progressBar.style.width = `${pct}%`;
+            }
+
+            window.addEventListener("scroll", updateScrollProgress, { passive: true });
+            updateScrollProgress();
+
+            if ("IntersectionObserver" in window) {
+                const navObserver = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                const activeIdx = sections.indexOf(entry.target);
+                                dots.forEach((d, i) => d.classList.toggle("is-active", i === activeIdx));
+                            }
+                        });
+                    },
+                    { threshold: 0.5 }
+                );
+                sections.forEach((sec) => navObserver.observe(sec));
+            }
+        }
+
+        /* ========================================================================
+           BOOTSTRAPPING
+           ======================================================================== */
+        document.addEventListener("DOMContentLoaded", () => {
+            populateContent();
+            const musicController = initMusic();
+            initEnvelope(() => {
+                if (musicController && typeof musicController.unlockPendingAmbient === "function") {
+                    musicController.unlockPendingAmbient();
+                }
+            });
+            initReveal();
+            initTypewriter();
+            initCountdown();
+            initLightbox();
+            initNavigationUI();
+        });
+    </script>
+</body>
+
+</html>
