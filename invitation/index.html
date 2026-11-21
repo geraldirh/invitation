@@ -2211,10 +2211,13 @@
            ======================================================================== */
         const CONFIG = {
             recipientName: "Nasywa Anggieta Tiara",
-            // Format ISO dengan zona waktu WIB (+07:00)
+            // Tanggal untuk Page Happy Birthday
+            birthdayDisplay: "Sabtu, 21 November 2026",
+            // Tanggal untuk Page Invitation & Acara (Target Countdown)
             eventDate: "2026-11-28T14:00:00+07:00",
             eventEndDate: "2026-11-28T22:00:00+07:00",
-            dateDisplay: "Sabtu, 28 November 2026",
+            inviteDateDisplay: "Sabtu, 28 November 2026",
+            dateDisplay: "Sabtu, 28 November 2026", // Fallback compatibility
             timeDisplay: "14.00 WIB — Selesai",
             location: "Dijemput Prince Gery",
             notes: "Siapkan senyum terbaikmu ya, nanti kita rayakan berdua ✨",
@@ -2234,7 +2237,7 @@
 
                 // --- SECTION 3: ONE OF MY FAVORITE MOMENTS (5 Foto Kolase) ---
                 { src: "momen1.jpeg", caption: "Momen #1" },                 // [1] Kolase 1
-                { src: "momen2.jpeg", caption: "Momen #2" },                 // [2] Kolase 2
+                { src: "momen2.jpg", caption: "Momen #2" },                 // [2] Kolase 2
                 { src: "momen3.jpeg", caption: "Momen #3" },                 // [3] Kolase 3
                 { src: "momen4.jpeg", caption: "Momen #4" },                 // [4] Kolase 4
                 { src: "momen5.jpeg", caption: "Momen #5" },                 // [5] Kolase 5
@@ -2465,7 +2468,7 @@
                 .join("");
 
             document.getElementById("heroRecipientName").textContent = CONFIG.recipientName;
-            document.getElementById("heroDateBadge").textContent = `🗓️ ${CONFIG.dateDisplay} • WIB`;
+            document.getElementById("heroDateBadge").textContent = `🗓️ ${CONFIG.birthdayDisplay || CONFIG.dateDisplay}`;
 
             // Hero photo (index 0)
             const heroData = createPhotoElement(0, `Foto ulang tahun ${CONFIG.recipientName}`, "Our special day ✨");
@@ -2566,7 +2569,7 @@
 
             // Invitation details
             document.getElementById("inviteName").textContent = CONFIG.recipientName;
-            document.getElementById("inviteDateText").textContent = CONFIG.dateDisplay;
+            document.getElementById("inviteDateText").textContent = CONFIG.inviteDateDisplay || CONFIG.dateDisplay;
             document.getElementById("inviteTimeText").textContent = CONFIG.timeDisplay;
             document.getElementById("inviteLocationText").textContent = CONFIG.location;
 
